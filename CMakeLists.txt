@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(test VERSION 1.0.0)
+project(Voxel-Engine VERSION 1.0.0)
 cmake_policy(SET CMP0072 NEW)
 
 

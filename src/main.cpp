@@ -11,10 +11,11 @@ int main() {
         return -1;
     }
 
-    window = glfwCreateWindow(640, 480, "Test", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
     glfwMakeContextCurrent(window);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cout << "Glad cannot start." << std::endl; 
         glfwTerminate();
         return -1;
     }
