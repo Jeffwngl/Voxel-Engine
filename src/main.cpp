@@ -4,7 +4,7 @@ int main() {
     // std::cout << "hello" << std::endl;
     
     // boilerplate
-    GLFWwindow* window;
+    GLFWwindow* window; // pointer to window
 
     if (!glfwInit()) {
         std::cout << "GLFW cannot start." << std::endl;
@@ -14,7 +14,7 @@ int main() {
     window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
     glfwMakeContextCurrent(window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) { // find functions for Open GL
         std::cout << "Glad cannot start." << std::endl; 
         glfwTerminate();
         return -1;
@@ -24,6 +24,8 @@ int main() {
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents(); // clear event queue every frame
+
+        glClear(GL_COLOR_BUFFER_BIT);
 
         glfwSwapBuffers(window);
     }
