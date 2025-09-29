@@ -4,7 +4,23 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
+std::string loadShaderSource(const std::string& filePath) {
+    std::ifstream file(filePath);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open shader file: " << filePath << std::endl;
+        return "";
+    }
+
+    std::stringstream buffer;
+    buffer << file.rdbuf();  // read whole file into buffer
+    return buffer.str();
+}
+
 int main() {
+
+    // import vertex shader text
+    std::string vertexShaderCode = loadShaderSource("shaders/vertex.txt");
+    const char* vertexShaderSource = vertexShaderCode.c_str();
 
     // GLFW initialization
     GLFWwindow* window; // pointer to window
@@ -14,7 +30,7 @@ int main() {
         return -1;
     }
 
-    // glfw version and profile control
+    // GLFW version and profile control
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -32,6 +48,31 @@ int main() {
 
     glViewport(0, 0, 640, 480);
 
+
+    // vertex shader buffer
+    unsigned int VBO;
+    glGenBuffers(1, &VBO); // generate ID for vertex buffer store this id in VBO
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); // bind ID to vertex buffer object
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangleVertices), triangleVertices, GL_STATIC_DRAW);
+
+    // compile vertex shader
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL); // attach shader source to shader object
+    glCompileShader(vertexShader);
+
+    int success;
+    char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+
+    if (!success) {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" <<
+        infoLog << std::endl;
+    }
+
+    // main loop
     while (!glfwWindowShouldClose(window)) { // keeps window up
 
         // key inputs
