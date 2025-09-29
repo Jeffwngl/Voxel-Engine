@@ -21,6 +21,7 @@ int main() {
 
     window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
     glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     // GLAD initialization
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) { // find functions for Open GL
@@ -34,6 +35,8 @@ int main() {
     glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
 
     while (!glfwWindowShouldClose(window)) { // keeps window up
+
+        processInput(window); // checks esc
 
         glfwPollEvents(); // checks keyboard or mouse events
 
