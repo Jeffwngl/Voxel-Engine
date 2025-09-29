@@ -1,11 +1,11 @@
 #include "config.h"
+#include "shapes/triangle.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
 int main() {
-    // std::cout << "hello" << std::endl;
-    
+
     // GLFW initialization
     GLFWwindow* window; // pointer to window
 
@@ -21,7 +21,7 @@ int main() {
 
     window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
     glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // call on every window resize
 
     // GLAD initialization
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) { // find functions for Open GL
@@ -32,16 +32,17 @@ int main() {
 
     glViewport(0, 0, 640, 480);
 
-    glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
-
     while (!glfwWindowShouldClose(window)) { // keeps window up
 
+        // key inputs
         processInput(window); // checks esc
 
-        glfwPollEvents(); // checks keyboard or mouse events
-
+        // rendering inputs
+        glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT); // resets color buffer to defined color
 
+        // buffers and event calls
+        glfwPollEvents(); // checks keyboard or mouse events
         glfwSwapBuffers(window);
     }
 
@@ -49,6 +50,7 @@ int main() {
     return 0;
 }
 
+// esc close key input
 void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);

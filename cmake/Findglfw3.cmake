@@ -1,4 +1,4 @@
-# USED ONLY FOR WINDOWS
+# USED ONLY FOR WINDOWS (Links glfw3 library)
 # Locate the glfw3 library
 #
 # This module defines the following variables:
