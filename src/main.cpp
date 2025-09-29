@@ -18,9 +18,12 @@ std::string loadShaderSource(const std::string& filePath) {
 
 int main() {
 
-    // import vertex shader text
+    // import shader source
     std::string vertexShaderCode = loadShaderSource("shaders/vertex.txt");
     const char* vertexShaderSource = vertexShaderCode.c_str();
+
+    std::string fragmentShaderCode = loadShaderSource("shaders/fragment.txt");
+    const char* fragmentShaderSource = fragmentShaderCode.c_str();
 
     // GLFW initialization
     GLFWwindow* window; // pointer to window
@@ -71,6 +74,32 @@ int main() {
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" <<
         infoLog << std::endl;
     }
+
+    // compile fragment shader
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+
+    // shader program
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (!success) {
+        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" <<
+        infoLog << std::endl;
+    }
+
+    // use shader
+    glUseProgram(shaderProgram);
+    glDeleteShader(fragmentShader);
+    glDeleteShader(vertexShader);
+    
 
     // main loop
     while (!glfwWindowShouldClose(window)) { // keeps window up
