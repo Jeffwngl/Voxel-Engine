@@ -8,3 +8,4 @@
 #include <fstream> // importing vertex shader text file
 #include <sstream>
 #include <string>
+#include <direct.h>
