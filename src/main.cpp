@@ -4,29 +4,59 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
-std::string loadShaderSource(const std::string& filePath) {
-    std::ifstream file;
-    std::stringstream buffer;
+static unsigned int compileShader(unsigned int type, const std::string& source) { // compile shader
+    unsigned int shader = glCreateShader(GL_VERTEX_SHADER);
+    const char* src = source.c_str();
+    glShaderSource(shader, 1, &src, NULL);
+    glCompileShader(shader);
 
-    file.open(filePath);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open shader file: " << filePath << std::endl;
-        return "";
+    // error handling
+    int success;
+    char infoLog[512];
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+
+    if (!success) {
+        glGetShaderInfoLog(shader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" <<
+        infoLog << std::endl;
+        glDeleteShader(shader);
+        return 0;
     }
 
-    buffer << file.rdbuf();  // read whole file into buffer
-    file.close();
-    return buffer.str();
+    return shader;
+}
+
+static unsigned int createShader(const std::string& vertexShader, const std::string& fragmentShader) { // create shader and linking
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+    unsigned int vs = compileShader(GL_VERTEX_SHADER, vertexShader);
+    unsigned int fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
+    glAttachShader(shaderProgram, vs);
+    glAttachShader(shaderProgram, fs);
+    glLinkProgram(shaderProgram);
+
+    //error handling
+    int success;
+    char infoLog[512];
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+
+    if (!success) {
+        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" <<
+        infoLog << std::endl;
+        glDeleteProgram(shaderProgram);
+        return 0;
+    }
+
+    glDeleteShader(vs);
+    glDeleteShader(fs);
+
+    return shaderProgram;
 }
 
 int main() {
 
-    // import shader source
-    // std::string vertexShaderCode = loadShaderSource("shaders/vertex.txt");
-    // const char* vertexShaderSource = vertexShaderCode.c_str();
-
-    // std::string fragmentShaderCode = loadShaderSource("shaders/fragment.txt");
-    // const char* fragmentShaderSource = fragmentShaderCode.c_str();
+    // SHADER SOURCE DEFINITIONS
     const char *vertexShaderSource = "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "void main()\n"
@@ -67,10 +97,12 @@ int main() {
     glViewport(0, 0, 640, 480);
 
     // SHADER
+
+    // vertex shader
     unsigned int vertexShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    vertexShader = glCreateShader(GL_VERTEX_SHADER); // returns a unique identifier
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL); // attach shader source to shader object
-    glCompileShader(vertexShader);
+    glCompileShader(vertexShader); // compiles shader source strings to machine code
 
     int success;
     char infoLog[512];
@@ -82,13 +114,19 @@ int main() {
         infoLog << std::endl;
     }
 
-    // compile fragment shader
+    // fragment shader
     unsigned int fragmentShader;
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
 
-    // shader program (linking)
+    if (!success) {
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" <<
+        infoLog << std::endl;
+    }
+
+    // shader program (linking) to use in OPENGL
     unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
@@ -109,6 +147,7 @@ int main() {
 
 
     // VERTEX BUFFER AND ARRAY
+
     unsigned int VAO;
     unsigned int VBO;
     glGenVertexArrays(1, &VAO);
@@ -125,7 +164,7 @@ int main() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    
+
 
     // MAIN LOOP
     while (!glfwWindowShouldClose(window)) { // keeps window up
