@@ -72,19 +72,6 @@ int main() {
     char buffer[FILENAME_MAX];
     _getcwd(buffer, FILENAME_MAX);
     std::cout << "Current working directory: " << buffer << std::endl;
-    // SHADER SOURCE DEFINITIONS
-    // const char *vertexShaderSource = "#version 330 core\n"
-    //     "layout (location = 0) in vec3 aPos;\n"
-    //     "void main()\n"
-    //     "{\n"
-    //     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    //     "}\0";
-    // const char *fragmentShaderSource = "#version 330 core\n"
-    //     "out vec4 FragColor;\n"
-    //     "void main()\n"
-    //     "{\n"
-    //     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    //     "}\n\0";
 
     std::string vertexShaderSource = loadShader("../../src/shaders/vertex.txt"); // working directory is in debug
     std::string fragmentShaderSource = loadShader("../../src/shaders/fragment.txt");
@@ -117,57 +104,10 @@ int main() {
 
     // SHADER
 
-    // // vertex shader
-    // unsigned int vertexShader;
-    // vertexShader = glCreateShader(GL_VERTEX_SHADER); // returns a unique identifier
-    // glShaderSource(vertexShader, 1, &vertexShaderSource, NULL); // attach shader source to shader object
-    // glCompileShader(vertexShader); // compiles shader source strings to machine code
-
-    // int success;
-    // char infoLog[512];
-    // glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-
-    // if (!success) {
-    //     glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-    //     std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" <<
-    //     infoLog << std::endl;
-    // }
-
-    // // fragment shader
-    // unsigned int fragmentShader;
-    // fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    // glCompileShader(fragmentShader);
-
-    // if (!success) {
-    //     glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-    //     std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" <<
-    //     infoLog << std::endl;
-    // }
-
-    // // shader program (linking) to use in OPENGL
-    // unsigned int shaderProgram;
-    // shaderProgram = glCreateProgram();
-    // glAttachShader(shaderProgram, vertexShader);
-    // glAttachShader(shaderProgram, fragmentShader);
-    // glLinkProgram(shaderProgram);
-
-    // glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    // if (!success) {
-    //     glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-    //     std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" <<
-    //     infoLog << std::endl;
-    // }
-
-    // function ver
-
     unsigned int shaderProgram = createShader(vertexShaderSource, fragmentShaderSource);
 
     // use shader
     glUseProgram(shaderProgram);
-    // glDeleteShader(fragmentShader);
-    // glDeleteShader(vertexShader);
-
 
     // VERTEX BUFFER AND ARRAY
 
