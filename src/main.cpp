@@ -86,6 +86,7 @@ int main() {
 
     // GLFW version and profile control
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
@@ -98,16 +99,15 @@ int main() {
         glfwTerminate();
         return -1;
     }
-
     glViewport(0, 0, 640, 480);
 
 
     // SHADER
 
     unsigned int shaderProgram = createShader(vertexShaderSource, fragmentShaderSource);
-
     // use shader
     glUseProgram(shaderProgram);
+
 
     // VERTEX BUFFER AND ARRAY
 
@@ -148,7 +148,6 @@ int main() {
         glfwPollEvents(); // checks keyboard or mouse events
         glfwSwapBuffers(window);
     }
-
     glDeleteProgram(shaderProgram);
     glfwTerminate();
     return 0;
