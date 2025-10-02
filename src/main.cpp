@@ -5,6 +5,14 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 
+static void GLClearError() {
+    while (!glGetError());
+}
+
+static void GLCheckError() {
+
+}
+
 static std::string loadShader(const std::string& filepath) { // load shader
     std::ifstream file(filepath);
     if (!file.is_open()) {
@@ -107,6 +115,9 @@ int main() {
 
     unsigned int shaderProgram = createShader(vertexShaderSource, fragmentShaderSource);
     glUseProgram(shaderProgram);
+    int location = glGetUniformLocation(shaderProgram, "u_Color");
+    // ASSERT(location != -1);
+    glUniform4f(location, 1.0f, 0.4f, 0.2f, 0.8f);
 
 
     // VERTEX BUFFER AND ARRAY AND INDEX BUFFER
@@ -123,15 +134,16 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, VBO); // bind ID to vertex buffer object
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW); // allocates memory for the buffer on GPU
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); // and uploads CPU data to GPU
     
     // vertex attributes and linking
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0); // tells opengl how to interpret each vertex
 
-    glEnableVertexAttribArray(0); // enables vertex attribute array 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    glEnableVertexAttribArray(0); // enables vertex attribute array 0 for rendering
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbinds array buffer
+    glBindVertexArray(0); // unbinds vertex array
+    // Do NOT unbind IBO inside VAO
 
 
     // MAIN LOOP
