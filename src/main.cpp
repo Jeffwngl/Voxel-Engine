@@ -70,7 +70,7 @@ static unsigned int createShader(const std::string& vertexShader, const std::str
 
 int main() {
     char buffer[FILENAME_MAX];
-    _getcwd(buffer, FILENAME_MAX);  // use getcwd(buffer, FILENAME_MAX) on Linux
+    _getcwd(buffer, FILENAME_MAX);
     std::cout << "Current working directory: " << buffer << std::endl;
     // SHADER SOURCE DEFINITIONS
     // const char *vertexShaderSource = "#version 330 core\n"
@@ -86,7 +86,7 @@ int main() {
     //     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
     //     "}\n\0";
 
-    std::string vertexShaderSource = loadShader("../../src/shaders/vertex.txt");
+    std::string vertexShaderSource = loadShader("../../src/shaders/vertex.txt"); // working directory is in debug
     std::string fragmentShaderSource = loadShader("../../src/shaders/fragment.txt");
 
     // GLFW initialization
@@ -99,7 +99,6 @@ int main() {
 
     // GLFW version and profile control
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
