@@ -1,5 +1,6 @@
 #include "config.h"
 #include "shapes/triangle.h"
+#include "shapes/rectangle.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -105,26 +106,30 @@ int main() {
     // SHADER
 
     unsigned int shaderProgram = createShader(vertexShaderSource, fragmentShaderSource);
-    // use shader
     glUseProgram(shaderProgram);
 
 
-    // VERTEX BUFFER AND ARRAY
+    // VERTEX BUFFER AND ARRAY AND INDEX BUFFER
 
     unsigned int VAO;
     unsigned int VBO;
+    unsigned int IBO;
+
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO); // generate ID for vertex buffer store this id in VBO
+    glGenBuffers(1, &IBO);
+
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO); // bind ID to vertex buffer object
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangleVertices), triangleVertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
     // vertex attributes and linking
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangleVertices), triangleVertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0); // tells opengl how to interpret each vertex
-    glEnableVertexAttribArray(0); // enables vertex attribute array 
 
+    glEnableVertexAttribArray(0); // enables vertex attribute array 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
@@ -139,10 +144,11 @@ int main() {
         glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT); // resets color buffer to defined color
 
-        // triangle
+        // shapes
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        // glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // buffers and event calls
         glfwPollEvents(); // checks keyboard or mouse events

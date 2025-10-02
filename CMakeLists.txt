@@ -8,7 +8,7 @@ find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
 # set files to be compiled and linked
-add_executable("${CMAKE_PROJECT_NAME}" src/config.h src/main.cpp src/glad.c src/shapes/triangle.cpp)
+add_executable("${CMAKE_PROJECT_NAME}" src/config.h src/main.cpp src/glad.c src/shapes/triangle.cpp src/shapes/rectangle.cpp)
 
 # add glfw dependencies
 target_include_directories("${CMAKE_PROJECT_NAME}" PRIVATE dependencies)
