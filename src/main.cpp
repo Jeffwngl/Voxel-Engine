@@ -100,6 +100,7 @@ int main() {
 
     window = glfwCreateWindow(640, 480, "Voxel Engine", NULL, NULL);
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // call on every window resize
 
     // GLAD initialization
@@ -117,7 +118,10 @@ int main() {
     glUseProgram(shaderProgram);
     int location = glGetUniformLocation(shaderProgram, "u_Color");
     // ASSERT(location != -1);
-    glUniform4f(location, 1.0f, 0.4f, 0.2f, 0.8f);
+    glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f);
+
+    float r = 0.0f; // color change
+    float increment = 0.05f;
 
 
     // VERTEX BUFFER AND ARRAY AND INDEX BUFFER
@@ -160,7 +164,17 @@ int main() {
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
         // glDrawArrays(GL_TRIANGLES, 0, 6);
+        glUniform4f(location, r, 0.3f, 0.8f, 1.0f);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        // changing color
+        if (r > 1.0f) {
+            increment = -0.05f;
+        }
+        else if (r < -1.0f) {
+            increment = 0.05f;
+        }
+        r += increment;
 
         // buffers and event calls
         glfwPollEvents(); // checks keyboard or mouse events
