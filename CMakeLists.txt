@@ -13,10 +13,13 @@ add_subdirectory(include/glfw) # build glfw
 # find_package(glfw REQUIRED) # use this if glfw is installed on your system
 
 add_library(glad STATIC src/glad.c) # build glad
+
 target_include_directories(glad PUBLIC include/glad/include)
 
 set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp)
+
+target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_SOURCE_DIR}/include") # specifies include folder
 
 # target_link_libraries("${PROJECT_NAME}" ${GLFW3_LIBRARY} OpenGL::GL)
 

@@ -11,7 +11,8 @@
 		"commands" : 
 		[
 			"add_executable",
-			"target_link_libraries"
+			"target_link_libraries",
+			"target_include_directories"
 		],
 		"files" : 
 		[
@@ -26,19 +27,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 19,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 23,
+				"line" : 20,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
 				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 29,
 				"parent" : 0
 			},
 			{
@@ -49,6 +50,12 @@
 				"file" : 1,
 				"line" : 152,
 				"parent" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 0
 			}
 		]
 	},
@@ -91,6 +98,10 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 6,
+					"path" : "/Users/jeffreywang/dev/repos/Voxel-Engine/include"
+				},
 				{
 					"backtrace" : 2,
 					"path" : "/Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include"

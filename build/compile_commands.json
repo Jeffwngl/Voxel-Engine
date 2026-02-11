@@ -7,7 +7,7 @@
 },
 {
   "directory": "/Users/jeffreywang/dev/repos/Voxel-Engine/build",
-  "command": "/usr/bin/clang++  -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -o CMakeFiles/Voxel-Engine.dir/src/main.cpp.o -c /Users/jeffreywang/dev/repos/Voxel-Engine/src/main.cpp",
+  "command": "/usr/bin/clang++  -I/Users/jeffreywang/dev/repos/Voxel-Engine/include -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -g -std=gnu++17 -arch arm64 -o CMakeFiles/Voxel-Engine.dir/src/main.cpp.o -c /Users/jeffreywang/dev/repos/Voxel-Engine/src/main.cpp",
   "file": "/Users/jeffreywang/dev/repos/Voxel-Engine/src/main.cpp",
   "output": "CMakeFiles/Voxel-Engine.dir/src/main.cpp.o"
 },

@@ -1,16 +1,16 @@
 #include <iostream>
 #include <stdio.h>
-#include "../include/glad/glad.h"
-#include "../include/glfw/include/GLFW/glfw3.h"
+#include <glad/glad.h>
+#include <glfw/include/GLFW/glfw3.h>
 
 int main() {
-    // 1️⃣ Initialize GLFW
+    // Initialize GLFW
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW\n";
         return -1;
     }
 
-    // 2️⃣ Configure OpenGL version 3.3 Core
+    // Configure OpenGL version 3.3 Core
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -19,7 +19,6 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required on macOS
 #endif
 
-    // 3️⃣ Create a window
     GLFWwindow* window = glfwCreateWindow(800, 600, "Test Window", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window\n";
@@ -29,13 +28,13 @@ int main() {
 
     glfwMakeContextCurrent(window);  // Make context current
 
-    // 4️⃣ Initialize GLAD
+    // Initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cerr << "Failed to initialize GLAD\n";
         return -1;
     }
 
-    // 5️⃣ Rendering loop
+    // Rendering loop
     while (!glfwWindowShouldClose(window)) {
         // Check for ESC key press
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -50,7 +49,7 @@ int main() {
         glfwPollEvents();
     }
 
-    // 6️⃣ Cleanup
+    // Cleanup
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
