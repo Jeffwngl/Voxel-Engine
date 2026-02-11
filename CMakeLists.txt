@@ -1,9 +1,27 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.10)
+cmake_policy(VERSION 3.10)
+
 project(Voxel-Engine)
 
-find_package(glfw3 REQUIRED)
-find_package(OpenGL REQUIRED)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ON)
 
-include_directories(include/glad)
-include_directories(include/glfw)
-include_directories(include)
+find_package(OpenGL REQUIRED) # find openGL
+
+add_subdirectory(include/glfw) # build glfw
+# find_package(glfw REQUIRED) # use this if glfw is installed on your system
+
+add_library(glad STATIC src/glad.c) # build glad
+target_include_directories(glad PUBLIC include/glad/include)
+
+set(source_dir "${PROJECT_SOURCE_DIR}/src/")
+add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp)
+
+# target_link_libraries("${PROJECT_NAME}" ${GLFW3_LIBRARY} OpenGL::GL)
+
+target_link_libraries(${PROJECT_NAME} glfw glad OpenGL::GL)
+
+if(APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa -framework IOKit -framework CoreVideo")
+endif()
