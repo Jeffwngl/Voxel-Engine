@@ -3,6 +3,11 @@
 #include <glad/glad.h>
 #include <glfw/include/GLFW/glfw3.h>
 
+void processInput(GLFWwindow *window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
 int main() {
     // Initialize GLFW
     if (!glfwInit()) {
@@ -37,11 +42,10 @@ int main() {
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
         // Check for ESC key press
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
+        processInput(window);
 
         // Set background color and clear
-        glClearColor(0.2f, 0.6f, 0.9f, 1.0f);  // light blue
+        glClearColor(0.2f, 0.6f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Swap buffers and poll events
