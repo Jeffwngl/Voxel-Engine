@@ -3,12 +3,53 @@
 #include <glad/glad.h>
 #include <glfw/include/GLFW/glfw3.h>
 
+// file loading
+#include <fstream>
+#include <sstream>
+#include <string>
+
+// using namespace std;
+
+const unsigned int SCREEN_HEIGHT = 600;
+const unsigned int SCREEN_WIDTH = 800;
+
 void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS ) {
         glfwSetWindowShouldClose(window, true);
+    }
 }
 
+std::string readFile(const char* filePath) {
+    std::ifstream file(filePath);
+    std::stringstream buffer;
+
+    if (file.is_open()) {
+        buffer << file.rdbuf();
+        file.close();
+    }
+    else {
+        std::cerr << "Could not open: " << filePath << std::endl;
+    }
+
+    return buffer.str();
+}
+
+// TESTING GEOMETRY
+float vertices[] = {
+    -0.5f, -0.5f, 0.0f,
+    0.5f, -0.5f, 0.0f,
+    0.0f, 0.5f, 0.0f
+};
+
+// TESTING SHADER/FRAGMENT
+std::string vertexShaderSource = readFile("../shaders/vertex.glsl");
+const char* vertexShaderSourcePtr = vertexShaderSource.c_str();
+
+std::string fragmentShaderSource = readFile("../shaders/fragment.glsl");
+const char* fragmentShaderSourcePtr = fragmentShaderSource.c_str();
+
 int main() {
+    
     // Initialize GLFW
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW\n";
@@ -24,7 +65,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // Required on macOS
 #endif
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Test Window", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Voxel Engine v0.0.1", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window\n";
         glfwTerminate();
@@ -33,11 +74,69 @@ int main() {
 
     glfwMakeContextCurrent(window);  // Make context current
 
+
     // Initialize GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cerr << "Failed to initialize GLAD\n";
         return -1;
     }
+
+
+    // Vertices and Shaders
+    unsigned int VBO, VAO;
+    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &VAO);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSourcePtr, NULL);
+    glCompileShader(vertexShader);
+
+
+    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSourcePtr, NULL);
+    glCompileShader(fragmentShader);
+
+
+    // check shader success
+    int success;
+    char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        std::cout << "Error compiling vertex shader: " << infoLog << std::endl;
+    }
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        std::cout << "Error compiling fragment shader:" << infoLog << std::endl;
+    }
+
+
+    unsigned int shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+
+    // check program success
+    // rewrite the check before or find a better way
+
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // 0 location from vertex shader definition
+    glEnableVertexAttribArray(0);
+
+    glUseProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
@@ -45,8 +144,13 @@ int main() {
         processInput(window);
 
         // Set background color and clear
-        glClearColor(0.2f, 0.6f, 0.9f, 1.0f);
+        glClearColor(0.6f, 0.6f, 0.9f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        // triangle
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
