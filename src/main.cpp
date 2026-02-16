@@ -19,6 +19,7 @@ void processInput(GLFWwindow *window) {
     }
 }
 
+
 std::string readFile(const char* filePath) {
     std::ifstream file(filePath);
     std::stringstream buffer;
@@ -30,9 +31,28 @@ std::string readFile(const char* filePath) {
     else {
         std::cerr << "Could not open: " << filePath << std::endl;
     }
-
     return buffer.str();
 }
+
+
+void checkErrors(unsigned int ID, std::string type) {
+    int success;
+    char infoLog[512];
+    if (type != "PROGRAM") {
+        glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
+        if (!success) {
+            glGetShaderInfoLog(ID, 512, NULL, infoLog);
+            std::cout << "Shader Compilation Error: " << type << ":\n" << infoLog << std::endl;
+        }
+    } else {
+        glGetProgramiv(ID, GL_LINK_STATUS, &success);
+        if (!success) {
+            glGetProgramInfoLog(ID, 512, NULL, infoLog);
+            std::cout << "Program Linking Error:\n" << infoLog << std::endl;
+        }
+    }
+}
+
 
 // TESTING GEOMETRY
 float vertices[] = {
@@ -47,6 +67,7 @@ const char* vertexShaderSourcePtr = vertexShaderSource.c_str();
 
 std::string fragmentShaderSource = readFile("../shaders/fragment.glsl");
 const char* fragmentShaderSourcePtr = fragmentShaderSource.c_str();
+
 
 int main() {
     
@@ -102,29 +123,16 @@ int main() {
     glCompileShader(fragmentShader);
 
 
-    // check shader success
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "Error compiling vertex shader: " << infoLog << std::endl;
-    }
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cout << "Error compiling fragment shader:" << infoLog << std::endl;
-    }
-
-
     unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
 
 
-    // check program success
-    // rewrite the check before or find a better way
+    // check success
+    checkErrors(vertexShader, "VERTEX");
+    checkErrors(fragmentShader, "FRAGMENT");
+    checkErrors(shaderProgram, "PROGRAM");  
 
     
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -138,13 +146,18 @@ int main() {
     glDeleteShader(fragmentShader);
 
 
+    int numAttributes; // check for num of attributes
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &numAttributes);
+    std::cout << "Number of Attributes: " << numAttributes << std::endl;
+
+
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
         // Check for ESC key press
         processInput(window);
 
         // Set background color and clear
-        glClearColor(0.6f, 0.6f, 0.9f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // triangle
