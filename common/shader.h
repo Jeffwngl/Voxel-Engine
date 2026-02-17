@@ -9,20 +9,6 @@
 #include <sstream>
 #include <iostream>
 
-std::string readFile(const char* filePath) {
-    std::ifstream file(filePath);
-    std::stringstream buffer;
-
-    if (file.is_open()) {
-        buffer << file.rdbuf();
-        file.close();
-    }
-    else {
-        std::cerr << "Could not open: " << filePath << std::endl;
-    }
-    return buffer.str();
-}
-
 class Shader {
     public:
         unsigned int shaderProgram;

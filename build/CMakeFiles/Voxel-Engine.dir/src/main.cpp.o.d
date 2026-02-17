@@ -794,6 +794,10 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/glad.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/../KHR/khrplatform.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include/GLFW/glfw3.h \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/stb_image.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_static_assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
