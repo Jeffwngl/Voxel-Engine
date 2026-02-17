@@ -10,9 +10,6 @@
 
 // using namespace std;
 
-const unsigned int SCREEN_HEIGHT = 600;
-const unsigned int SCREEN_WIDTH = 800;
-
 
 
 void processInput(GLFWwindow *window) {
@@ -20,7 +17,6 @@ void processInput(GLFWwindow *window) {
         glfwSetWindowShouldClose(window, true);
     }
 }
-
 
 std::string readFile(const char* filePath) {
     std::ifstream file(filePath);
@@ -35,7 +31,6 @@ std::string readFile(const char* filePath) {
     }
     return buffer.str();
 }
-
 
 void checkErrors(unsigned int ID, std::string type) {
     int success;
@@ -56,6 +51,9 @@ void checkErrors(unsigned int ID, std::string type) {
 }
 
 
+
+const unsigned int SCREEN_HEIGHT = 600;
+const unsigned int SCREEN_WIDTH = 800;
 
 // TESTING GEOMETRY
 float vertices[] = {

@@ -14,7 +14,7 @@ add_subdirectory(include/glfw) # build glfw
 
 add_library(glad STATIC src/glad.c) # build glad
 
-target_include_directories(glad PUBLIC include/glad/include)
+# target_include_directories(glad PUBLIC include/glad/include)
 
 set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp)

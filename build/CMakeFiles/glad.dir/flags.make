@@ -4,7 +4,7 @@
 # compile C with /usr/bin/clang
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/include
+C_INCLUDES = 
 
 C_FLAGSarm64 = -g -arch arm64
 

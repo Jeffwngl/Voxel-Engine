@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/clang++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/jeffreywang/dev/repos/Voxel-Engine/include -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
+CXX_INCLUDES = -I/Users/jeffreywang/dev/repos/Voxel-Engine/include -I/Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include -iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
 
 CXX_FLAGSarm64 = -g -std=gnu++17 -arch arm64
 
