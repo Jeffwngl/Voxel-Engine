@@ -92,7 +92,6 @@ int main() {
     glEnableVertexAttribArray(1);
 
 
-
     // int numAttributes; // check for num of attributes
     // glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &numAttributes);
     // std::cout << "Number of Attributes: " << numAttributes << std::endl;
@@ -106,8 +105,6 @@ int main() {
         // Set background color and clear
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        // glUseProgram(shaderProgram);
 
         shaderProgram.useShader();
 

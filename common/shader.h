@@ -23,24 +23,6 @@ std::string readFile(const char* filePath) {
     return buffer.str();
 }
 
-void checkErrors(unsigned int ID, std::string type) {
-    int success;
-    char infoLog[512];
-    if (type != "PROGRAM") {
-        glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
-        if (!success) {
-            glGetShaderInfoLog(ID, 512, NULL, infoLog);
-            std::cout << "Shader Compilation Error: " << type << ":\n" << infoLog << std::endl;
-        }
-    } else {
-        glGetProgramiv(ID, GL_LINK_STATUS, &success);
-        if (!success) {
-            glGetProgramInfoLog(ID, 512, NULL, infoLog);
-            std::cout << "Program Linking Error:\n" << infoLog << std::endl;
-        }
-    }
-}
-
 class Shader {
     public:
         unsigned int shaderProgram;
