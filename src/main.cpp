@@ -146,9 +146,9 @@ int main() {
     glDeleteShader(fragmentShader);
 
 
-    int numAttributes; // check for num of attributes
-    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &numAttributes);
-    std::cout << "Number of Attributes: " << numAttributes << std::endl;
+    // int numAttributes; // check for num of attributes
+    // glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &numAttributes);
+    // std::cout << "Number of Attributes: " << numAttributes << std::endl;
 
 
     // Rendering loop
@@ -161,7 +161,12 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         // triangle
+        float timeValue = glfwGetTime();
+        float colorValue = (sin(timeValue) / 2.0f) + 0.5f;
+        int colorLocation = glGetUniformLocation(shaderProgram, "InColor");
         glUseProgram(shaderProgram);
+        glUniform4f(colorLocation, 0.0f, colorValue, 0.0f, 1.0f);
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
