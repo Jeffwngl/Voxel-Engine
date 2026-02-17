@@ -8,6 +8,9 @@
 #include <sstream>
 #include <string>
 
+// shaders
+#include "../common/shader.h"
+
 // using namespace std;
 
 
@@ -18,37 +21,37 @@ void processInput(GLFWwindow *window) {
     }
 }
 
-std::string readFile(const char* filePath) {
-    std::ifstream file(filePath);
-    std::stringstream buffer;
+// std::string readFile(const char* filePath) {
+//     std::ifstream file(filePath);
+//     std::stringstream buffer;
 
-    if (file.is_open()) {
-        buffer << file.rdbuf();
-        file.close();
-    }
-    else {
-        std::cerr << "Could not open: " << filePath << std::endl;
-    }
-    return buffer.str();
-}
+//     if (file.is_open()) {
+//         buffer << file.rdbuf();
+//         file.close();
+//     }
+//     else {
+//         std::cerr << "Could not open: " << filePath << std::endl;
+//     }
+//     return buffer.str();
+// }
 
-void checkErrors(unsigned int ID, std::string type) {
-    int success;
-    char infoLog[512];
-    if (type != "PROGRAM") {
-        glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
-        if (!success) {
-            glGetShaderInfoLog(ID, 512, NULL, infoLog);
-            std::cout << "Shader Compilation Error: " << type << ":\n" << infoLog << std::endl;
-        }
-    } else {
-        glGetProgramiv(ID, GL_LINK_STATUS, &success);
-        if (!success) {
-            glGetProgramInfoLog(ID, 512, NULL, infoLog);
-            std::cout << "Program Linking Error:\n" << infoLog << std::endl;
-        }
-    }
-}
+// void checkErrors(unsigned int ID, std::string type) {
+//     int success;
+//     char infoLog[512];
+//     if (type != "PROGRAM") {
+//         glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
+//         if (!success) {
+//             glGetShaderInfoLog(ID, 512, NULL, infoLog);
+//             std::cout << "Shader Compilation Error: " << type << ":\n" << infoLog << std::endl;
+//         }
+//     } else {
+//         glGetProgramiv(ID, GL_LINK_STATUS, &success);
+//         if (!success) {
+//             glGetProgramInfoLog(ID, 512, NULL, infoLog);
+//             std::cout << "Program Linking Error:\n" << infoLog << std::endl;
+//         }
+//     }
+// }
 
 
 
@@ -116,26 +119,7 @@ int main() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 
-    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSourcePtr, NULL);
-    glCompileShader(vertexShader);
-
-
-    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSourcePtr, NULL);
-    glCompileShader(fragmentShader);
-
-
-    unsigned int shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-
-    // check success
-    checkErrors(vertexShader, "VERTEX");
-    checkErrors(fragmentShader, "FRAGMENT");
-    checkErrors(shaderProgram, "PROGRAM");  
+    Shader shaderProgram("../shaders/vertex.glsl", "../shaders/fragment.glsl");
 
     
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -145,11 +129,7 @@ int main() {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float))); 
     glEnableVertexAttribArray(1);
-
-
-    glUseProgram(shaderProgram);
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    
 
 
     // int numAttributes; // check for num of attributes
@@ -166,7 +146,9 @@ int main() {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(shaderProgram);
+        // glUseProgram(shaderProgram);
+
+        shaderProgram.useShader();
 
         // TRIANGLE
         // for uniform only

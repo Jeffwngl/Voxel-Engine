@@ -816,8 +816,12 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stdint.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/KHR/khrplatform.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/glad.h \
-  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include/GLFW/glfw3.h
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include/GLFW/glfw3.h \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/utils.h \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/common/shader.h
 
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/common/shader.h:
 
 /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/glad.h:
 
@@ -1882,6 +1886,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/size.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/copy_options.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/utils.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/replace_copy_if.h:
 

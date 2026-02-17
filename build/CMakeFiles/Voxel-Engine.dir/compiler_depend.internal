@@ -818,4 +818,6 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o
  /Users/jeffreywang/dev/repos/Voxel-Engine/include/KHR/khrplatform.h
  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/glad.h
  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include/GLFW/glfw3.h
+ /Users/jeffreywang/dev/repos/Voxel-Engine/include/utils.h
+ /Users/jeffreywang/dev/repos/Voxel-Engine/common/shader.h
 
