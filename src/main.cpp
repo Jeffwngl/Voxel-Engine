@@ -13,6 +13,8 @@
 const unsigned int SCREEN_HEIGHT = 600;
 const unsigned int SCREEN_WIDTH = 800;
 
+
+
 void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS ) {
         glfwSetWindowShouldClose(window, true);
@@ -54,11 +56,13 @@ void checkErrors(unsigned int ID, std::string type) {
 }
 
 
+
 // TESTING GEOMETRY
 float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f,
-    0.0f, 0.5f, 0.0f
+    // positions // colors
+    0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom right
+    -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom left
+    0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f // top
 };
 
 // TESTING SHADER/FRAGMENT
@@ -67,6 +71,7 @@ const char* vertexShaderSourcePtr = vertexShaderSource.c_str();
 
 std::string fragmentShaderSource = readFile("../shaders/fragment.glsl");
 const char* fragmentShaderSourcePtr = fragmentShaderSource.c_str();
+
 
 
 int main() {
@@ -138,8 +143,11 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // 0 location from vertex shader definition
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0); // 0 location from vertex shader definition
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float))); 
+    glEnableVertexAttribArray(1);
+
 
     glUseProgram(shaderProgram);
     glDeleteShader(vertexShader);
@@ -160,12 +168,14 @@ int main() {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // triangle
-        float timeValue = glfwGetTime();
-        float colorValue = (sin(timeValue) / 2.0f) + 0.5f;
-        int colorLocation = glGetUniformLocation(shaderProgram, "InColor");
         glUseProgram(shaderProgram);
-        glUniform4f(colorLocation, 0.0f, colorValue, 0.0f, 1.0f);
+
+        // TRIANGLE
+        // for uniform only
+        // float timeValue = glfwGetTime();
+        // float colorValue = (sin(timeValue) / 2.0f) + 0.5f;
+        // int colorLocation = glGetUniformLocation(shaderProgram, "InColor");
+        // glUniform4f(colorLocation, 0.0f, colorValue, 0.0f, 1.0f);
 
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
