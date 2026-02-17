@@ -11,7 +11,7 @@
 
 class Shader {
     public:
-        unsigned int shaderProgram;
+        unsigned int shaderID;
 
         Shader(const char* vertexPath, const char* fragmentPath) {
             // load shaders
@@ -32,28 +32,28 @@ class Shader {
             utils::checkErrors(fragmentShader, "FRAGMENT");
             
             // program
-            shaderProgram = glCreateProgram();
-            glAttachShader(shaderProgram, vertexShader);
-            glAttachShader(shaderProgram, fragmentShader);
-            glLinkProgram(shaderProgram);
-            utils::checkErrors(shaderProgram, "PROGRAM");
+            shaderID = glCreateProgram();
+            glAttachShader(shaderID, vertexShader);
+            glAttachShader(shaderID, fragmentShader);
+            glLinkProgram(shaderID);
+            utils::checkErrors(shaderID, "PROGRAM");
 
             glDeleteShader(vertexShader);
             glDeleteShader(fragmentShader);
         };
 
         void useShader() {
-            glUseProgram(shaderProgram);
+            glUseProgram(shaderID);
         };
 
         void setBool(const std::string &name, bool value) const {
-            glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), (int)value);
+            glUniform1i(glGetUniformLocation(shaderID, name.c_str()), (int)value);
         }
         void setInt(const std::string &name, int value) const {
-            glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
+            glUniform1i(glGetUniformLocation(shaderID, name.c_str()), value);
         }
         void setFloat(const std::string &name, float value) const {
-            glUniform1f(glGetUniformLocation(shaderProgram, name.c_str()), value);
+            glUniform1f(glGetUniformLocation(shaderID, name.c_str()), value);
         }
 };
 
