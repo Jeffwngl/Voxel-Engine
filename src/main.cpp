@@ -21,38 +21,6 @@ void processInput(GLFWwindow *window) {
     }
 }
 
-// std::string readFile(const char* filePath) {
-//     std::ifstream file(filePath);
-//     std::stringstream buffer;
-
-//     if (file.is_open()) {
-//         buffer << file.rdbuf();
-//         file.close();
-//     }
-//     else {
-//         std::cerr << "Could not open: " << filePath << std::endl;
-//     }
-//     return buffer.str();
-// }
-
-// void checkErrors(unsigned int ID, std::string type) {
-//     int success;
-//     char infoLog[512];
-//     if (type != "PROGRAM") {
-//         glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
-//         if (!success) {
-//             glGetShaderInfoLog(ID, 512, NULL, infoLog);
-//             std::cout << "Shader Compilation Error: " << type << ":\n" << infoLog << std::endl;
-//         }
-//     } else {
-//         glGetProgramiv(ID, GL_LINK_STATUS, &success);
-//         if (!success) {
-//             glGetProgramInfoLog(ID, 512, NULL, infoLog);
-//             std::cout << "Program Linking Error:\n" << infoLog << std::endl;
-//         }
-//     }
-// }
-
 
 
 const unsigned int SCREEN_HEIGHT = 600;
@@ -65,13 +33,6 @@ float vertices[] = {
     -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, // bottom left
     0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f // top
 };
-
-// TESTING SHADER/FRAGMENT
-std::string vertexShaderSource = readFile("../shaders/vertex.glsl");
-const char* vertexShaderSourcePtr = vertexShaderSource.c_str();
-
-std::string fragmentShaderSource = readFile("../shaders/fragment.glsl");
-const char* fragmentShaderSourcePtr = fragmentShaderSource.c_str();
 
 
 
@@ -129,7 +90,7 @@ int main() {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float))); 
     glEnableVertexAttribArray(1);
-    
+
 
 
     // int numAttributes; // check for num of attributes
