@@ -603,8 +603,10 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/atomic \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bit \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cctype \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cerrno \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cfloat \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/climits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/clocale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath \
@@ -624,6 +626,7 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/errno.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/exception \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/filesystem \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/float.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/format \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/functional \
@@ -669,6 +672,7 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/float.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/arm/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/limits.h \
@@ -812,6 +816,7 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_rsize_t.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_size_t.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_wchar_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/17/include/float.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/limits.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/ptrcheck.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stdarg.h \
@@ -820,6 +825,307 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/KHR/khrplatform.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/glad.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/glfw/include/GLFW/glfw3.h \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_vectorize.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_exponential.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_vector_relational.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_fixes.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_vectorize.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_common.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_geometric.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec1.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/matrix.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x3.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x4.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x2.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x3.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x4.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x2.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x3.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x4.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_matrix.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/matrix.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_vectorize.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_vector_decl.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x2.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_int_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_uint_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float2_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float3_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float4_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int2_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int3_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int4_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint2_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint3_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint4_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/simd/platform.h \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_fixes.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_vectorize.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_integer.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_packing.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_trigonometric.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_half.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_half.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/fwd.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/glm.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/constants.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/matrix.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_clip_space.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_clip_space.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_projection.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_projection.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_transform.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_transform.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_relational.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/matrix_transform.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_float.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_quat.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_quat.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_geometric.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_int_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_uint_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_common.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_common.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_double.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_double_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_float.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_float_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_transform.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_transform.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_trigonometric.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool1_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double1_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float1_precision.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int1_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_relational.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint1_sized.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/constants.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/matrix_transform.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/epsilon.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/epsilon.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/quaternion.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/quaternion.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/vec1.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/matrix.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/matrix_transform.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/matrix_transform.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/type_ptr.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/type_ptr.inl \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/integer.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/matrix.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/packing.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec2.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec3.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec4.hpp \
+  /Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/stb_image.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/include/utils.h \
   /Users/jeffreywang/dev/repos/Voxel-Engine/common/shader.h
@@ -829,11 +1135,251 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Users/jeffreywang/dev/repos/Voxel-Engine/include/stb_image.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/integer.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/type_ptr.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/matrix_transform.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/quaternion.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/epsilon.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint1_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_relational.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double1_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool1_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_trigonometric.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_trigonometric.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_transform.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_transform.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_double_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint1.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_geometric.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_quat.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_quat.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/matrix_transform.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_relational.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_relational.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_relational.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_geometric.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_common.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_transform.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_projection.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_clip_space.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/constants.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/fwd.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_half.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_half.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_integer.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint4_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint3_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int3_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int2_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float4_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/epsilon.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double4_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint2_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/quaternion.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_uint_sized.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x2.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vec2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_matrix.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_vector_decl.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/type_ptr.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x4_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float3x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x4_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x4_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x3_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double2x3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x3.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x4.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x3.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/matrix.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec1.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_geometric.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_common.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_common.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/constants.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x4.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/compute_vector_relational.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec4.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec2.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec1.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/setup.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/qualifier.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_vector_relational.inl:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/common.hpp:
+
 /Users/jeffreywang/dev/repos/Voxel-Engine/include/glad/glad.h:
 
 /Users/jeffreywang/dev/repos/Voxel-Engine/include/KHR/khrplatform.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stddef.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_constants.inl:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stdarg.h:
 
@@ -852,6 +1398,10 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_nullptr_t.h:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_null.h:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stdarg___gnuc_va_list.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wchar.h:
 
@@ -917,7 +1467,11 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigset_t.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigaltstack.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float1_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/unordered_map:
 
@@ -928,6 +1482,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_null.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mode_t.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int1.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_intptr_t.h:
 
@@ -949,9 +1505,15 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_gid_t.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float2.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/float.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsfilcnt_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsblkcnt_t.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x4.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_setsize.h:
 
@@ -985,6 +1547,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stddef.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/scalar_int_sized.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/malloc/_ptrcheck.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_suseconds_t.h:
@@ -1000,6 +1564,10 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/pthread_impl.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/_OSByteOrder.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/float.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x4_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_if.h:
 
@@ -1048,6 +1616,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/perm_options.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdio.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_float.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdint.h:
 
@@ -1105,13 +1675,15 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cctype:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bit:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wctype.h:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bit:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/atomic:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double1.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__verbose_abort:
 
@@ -1134,6 +1706,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/scope_guard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/piecewise_construct.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_exponential.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mbstate_t.h:
 
@@ -1219,6 +1793,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/make_const_lvalue_ref.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_packing.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_unsigned_integer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_trivially_relocatable.h:
@@ -1250,6 +1826,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/once_flag.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_reference_wrapper.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/glm.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_reference.h:
 
@@ -1349,6 +1927,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/extent.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_vectorize.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/enable_if.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/__wctype.h:
@@ -1361,6 +1941,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/disjunction.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double3.hpp:
+
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stdarg_header_macro.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_object.h:
@@ -1369,7 +1951,7 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/decay.h:
 
-/Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stdarg___gnuc_va_list.h:
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float1.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/datasizeof.h:
 
@@ -1386,6 +1968,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_static_assert.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/common_reference.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/gtc/vec1.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/alignment_of.h:
 
@@ -1531,7 +2115,11 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/nothrow_t.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/new_handler.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/vector_relational.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/launder.h:
 
@@ -1545,13 +2133,19 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/allocate.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int1_sized.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/unique_lock.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat4x2.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory_resource/polymorphic_allocator.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x2_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h:
 
@@ -1607,6 +2201,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/errno.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_common.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/rounding_functions.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/concepts:
@@ -1661,11 +2257,15 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uintmax_t.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_float.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/error_functions.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/endian.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_endian.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/limits:
 
@@ -1679,9 +2279,15 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/wrap_iter.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/rank.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/insert_iterator.h:
 
@@ -1737,6 +2343,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/compare_three_way_result.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/simd/platform.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/addressof.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/temp_value.h:
@@ -1757,6 +2365,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale_dir/locale_base_api.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_uint2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/___wctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/aliasing_iterator.h:
@@ -1767,6 +2377,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_stdlib.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/variant.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/lower_bound.h:
@@ -1776,6 +2388,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/simd_utils.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/subrange.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double4x2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_union.h:
 
@@ -1791,7 +2405,11 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/istream.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x2.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic_lock_free.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float4x4_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sample.h:
 
@@ -1806,6 +2424,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/fstream.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/complex.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_double3_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:
 
@@ -1839,7 +2459,13 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/construct_at.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/packing.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_projection.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/incrementable_traits.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool2_precision.hpp:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stdarg_va_copy.h:
 
@@ -1873,11 +2499,17 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_int16_t.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_float2x4_precision.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic_init.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_entry.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_double.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int4_sized.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__cstddef/size_t.h:
 
@@ -1923,11 +2555,15 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/errno.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/func_trigonometric.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/perms.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/same_as.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/platform.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_clip_space.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_standard_layout.h:
 
@@ -1981,6 +2617,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/class_or_enum.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cfloat:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/boolean_testable.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/count_if.h:
@@ -2008,6 +2646,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_posix_availability.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__tuple/ignore.h:
+
+/Library/Developer/CommandLineTools/usr/lib/clang/17/include/float.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/steady_clock.h:
 
@@ -2051,6 +2691,10 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/not_fn.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_float2_precision.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/array:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/minmax_element.h:
@@ -2062,6 +2706,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator_traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mbstate_t.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_transform.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/includes.h:
 
@@ -2082,6 +2728,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/lock_guard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/unique_temporary_buffer.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_int3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/abs.h:
 
@@ -2120,6 +2768,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_string.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/synth_three_way.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool1.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/binary_negate.h:
 
@@ -2201,6 +2851,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unique.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/trigonometric.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_def.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition_point.h:
@@ -2210,6 +2862,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/exception:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/swap_ranges.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x3.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/convertible_to.h:
 
@@ -2223,6 +2877,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat2x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/destruct_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/___wctype.h:
@@ -2234,6 +2890,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__cstddef/byte.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_vec3.hpp:
 
 /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stdint.h:
 
@@ -2283,6 +2941,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_valid_expansion.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat3x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/is_sorted.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/iterator_operations.h:
@@ -2295,6 +2955,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/half_positive.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/geometric.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_locale_posix2008.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_wint_t.h:
@@ -2304,6 +2966,10 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/mismatch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/bounded_iter.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/mat4x3.hpp:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/min_element.h:
 
@@ -2357,6 +3023,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/mutex:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/_fixes.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/upper_bound.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/equality_comparable.h:
@@ -2389,6 +3057,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/exponential.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_wctype_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocate_at_least.h:
@@ -2403,9 +3073,13 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/filesystem:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/vector_bool4_precision.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/exchange.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/is_sorted_until.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat3x2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_locale_t.h:
 
@@ -2427,6 +3101,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_unsigned.h:
 
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/detail/type_mat2x4.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/weak_result_type.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/binder2nd.h:
@@ -2438,6 +3114,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/stable_partition.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_errno_t.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/matrix_double3x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/placement_new_delete.h:
 
@@ -2452,6 +3130,8 @@ CMakeFiles/Voxel-Engine.dir/src/main.cpp.o: /Users/jeffreywang/dev/repos/Voxel-E
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_cvref.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_wctrans_t.h:
+
+/Users/jeffreywang/dev/repos/Voxel-Engine/include/glm/ext/quaternion_float_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/streambuf.h:
 

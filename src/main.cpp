@@ -3,8 +3,14 @@
 #include <glad/glad.h>
 #include <glfw/include/GLFW/glfw3.h>
 
+// loading texture images
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h> // loading texture images
+#include <stb_image.h>
+
+// math libraries
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 // file loading
 #include <fstream>
@@ -84,7 +90,7 @@ int main() {
     Shader shaderProgram("../shaders/vertex.glsl", "../shaders/fragment.glsl");
 
 
-    // Vertices and Shaders
+    // vertices and shaders
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -105,13 +111,13 @@ int main() {
     // glEnableVertexAttribArray(1);
 
     // rectangle
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0); // vertex
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0); // vertex location = 0
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float))); // color
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float))); // color location = 1
     glEnableVertexAttribArray(1);
 
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float))); // texture
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float))); // texture location = 2
     glEnableVertexAttribArray(2);
 
 
@@ -164,8 +170,11 @@ int main() {
     stbi_image_free(data);
 
 
+    // glm::vec4 vec()
+
+
     shaderProgram.useShader();
-    glUniform1i(glGetUniformLocation(shaderProgram.shaderID, "texture1"), 0);
+    shaderProgram.setInt("texture1", 0);
     shaderProgram.setInt("texture2", 1);
 
 
@@ -186,14 +195,23 @@ int main() {
         // float colorValue = (sin(timeValue) / 2.0f) + 0.5f;
         // int colorLocation = glGetUniformLocation(shaderProgram, "InColor");
         // glUniform4f(colorLocation, 0.0f, colorValue, 0.0f, 1.0f);
+
+        // matrix transformation
+        glm::mat4 transformation = glm::mat4(1.0f);
+        transformation = glm::rotate(transformation, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+        transformation = glm::scale(transformation, glm::vec3(0.5, 0.5, 0.5));
+        unsigned int transformLoc = glGetUniformLocation(shaderProgram.shaderID,"transform");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transformation));
+
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
 
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
-        
+
         glBindVertexArray(VAO);
-        // glDrawArrays(GL_TRIANGLES, 0, 3);
+        // glDrawArrays(GL_TRIANGLES, 0, 3); // triangle
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Swap buffers and poll events
