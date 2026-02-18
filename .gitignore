@@ -1,5 +1,4 @@
-build/
-bin/
+build
 out/
 .gitignore
 .vscode/
