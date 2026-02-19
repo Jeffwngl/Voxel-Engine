@@ -81,15 +81,8 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f, 1.0f, -1.5f)
 };
 
-// orbiting camera
-// glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-// glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-// glm::vec3 cameraDirY = glm::normalize(cameraPos - cameraTarget); // opposite dir of camera
-
-// glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-// glm::vec3 cameraDirX = glm::normalize(glm::cross(cameraDirY, up));
-
-// glm::vec3 cameraDirZ = glm::cross(cameraDirX, cameraDirY);
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -214,6 +207,12 @@ int main() {
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
+        
+        // delta time
+        float currentFrame = static_cast<float>(glfwGetTime());
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
         // Check for ESC key press
         processInput(window);
 
@@ -228,9 +227,6 @@ int main() {
 
         shaderProgram.useShader();
 
-        // model / view
-        // glm::mat4 model = glm::mat4(1.0f);
-        // glm::mat4 view = glm::mat4(1.0f);
         
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         shaderProgram.setMat4("view", view);
@@ -266,7 +262,7 @@ void processInput(GLFWwindow *window) {
         glfwSetWindowShouldClose(window, true);
     }
 
-    const float cameraSpeed = 0.05f;
+    const float cameraSpeed = static_cast<float>(2.5 * deltaTime);
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         cameraPos += cameraSpeed * cameraFront;
     }
@@ -278,5 +274,11 @@ void processInput(GLFWwindow *window) {
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
         cameraPos -= cameraSpeed * cameraFront;
+    }
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+        cameraPos += cameraSpeed * cameraUp;
+    }
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+        cameraPos -= cameraSpeed * cameraUp;
     }
 }
