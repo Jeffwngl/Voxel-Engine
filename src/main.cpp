@@ -106,6 +106,15 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f, 1.0f, -1.5f)
 };
 
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 cameraDirY = glm::normalize(cameraPos - cameraTarget); // opposite dir of camera
+
+glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 cameraDirX = glm::normalize(glm::cross(cameraDirY, up));
+
+glm::vec3 cameraDirZ = glm::cross(cameraDirX, cameraDirY);
+
 
 int main() {
     
@@ -233,6 +242,9 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 
+    glm::mat4 projection = glm::mat4(1.0f);
+    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f); // change to variables
+    shaderProgram.setMat4("projection", projection);
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
@@ -252,20 +264,25 @@ int main() {
         // int colorLocation = glGetUniformLocation(shaderProgram, "InColor");
         // glUniform4f(colorLocation, 0.0f, colorValue, 0.0f, 1.0f);
 
-        // projection / view
+        // model / view
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = glm::mat4(1.0f);
-        glm::mat4 projection = glm::mat4(1.0f);
+
+        const float orbitRadius = 10.0f;
+
+        float cameraX = sin(glfwGetTime()) * orbitRadius;
+        float cameraZ = cos(glfwGetTime()) * orbitRadius;
+        view = glm::lookAt(glm::vec3(cameraX, 0.0f, cameraZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        
         // model = glm::rotate(model, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-        projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f); // change to variables
+        // view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
         
         // int modelLoc = glGetUniformLocation(shaderProgram.shaderID, "model"); // model refers to variable in vertex shader
-        int viewLoc = glGetUniformLocation(shaderProgram.shaderID, "view");
+        // int viewLoc = glGetUniformLocation(shaderProgram.shaderID, "view");
         // glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model)); // pass model rotate instructions to vertex shader
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        // glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-        shaderProgram.setMat4("projection", projection);
+        shaderProgram.setMat4("view", view);
 
         // int projectionLoc = glGetUniformLocation(shaderProgram.shaderID, "projection");
         // glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
@@ -289,7 +306,7 @@ int main() {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, cubePositions[i]); // getting the transformation matrix
             float angle = 20.0f * i;
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f)); // (float)glfwGetTime() * 
             shaderProgram.setMat4("model", model); // set model variable in shader to new model
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
