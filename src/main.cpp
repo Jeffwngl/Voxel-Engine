@@ -23,6 +23,8 @@
 
 void processInput(GLFWwindow *window);
 void mouseCallBack(GLFWwindow *window, double xPos, double yPos);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void calculateFPS();
 
 
 const unsigned int SCREEN_HEIGHT = 600;
@@ -82,19 +84,27 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f, 1.0f, -1.5f)
 };
 
+// delta time
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
+// camera setup
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+// mouse camerae
 float yaw = -90.0f;
 float pitch = 0.0f;
 float lastMouseX = static_cast<float>(SCREEN_WIDTH) / 2.0f;
 float lastMouseY = static_cast<float>(SCREEN_HEIGHT) / 2.0f;
 
 bool firstLoad = true;
+
+// other
+float fps = 0.0f;
+double lastTime = glfwGetTime();
+int frameCount = 0;
 
 
 int main() {
@@ -122,7 +132,7 @@ int main() {
     }
 
     glfwMakeContextCurrent(window);  // Make context current
-
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouseCallBack);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -213,12 +223,14 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
     glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f); // change to variables
+    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f); // change to variables
     shaderProgram.setMat4("projection", projection);
 
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
+
+        calculateFPS();
 
         // delta time
         float currentFrame = static_cast<float>(glfwGetTime());
@@ -301,6 +313,7 @@ void mouseCallBack(GLFWwindow *window, double xPos, double yPos) {
         lastMouseY = yPos;
         firstLoad = false;
     }
+    // std::cout << pitch << ", " << yaw << '\n';
     float xMouseOffset = xPos - lastMouseX;
     float yMouseOffset = yPos - lastMouseY;
 
@@ -327,4 +340,31 @@ void mouseCallBack(GLFWwindow *window, double xPos, double yPos) {
     cameraDirection.z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
 
     cameraFront = glm::normalize(cameraDirection);
+}
+
+// void scrollCallback(GLFWwindow *window) {
+
+// }
+
+// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// ---------------------------------------------------------------------------------------------
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // make sure the viewport matches the new window dimensions; note that width and 
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
+}
+
+void calculateFPS() {
+    double currentTime = glfwGetTime();
+    frameCount++;
+
+    if (currentTime - lastTime >= 1.0) {
+        fps = (float)frameCount / (currentTime - lastTime);
+
+        std::cout << std::fixed << std::setprecision(1) << fps << " FPS" << std::endl;
+
+        frameCount = 0;
+        lastTime = currentTime;
+    }
 }
