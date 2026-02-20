@@ -29,4 +29,6 @@ sudo apt install libwayland-dev libxkbcommon-dev xorg-dev
 
 ```
 cd build
+cmake ..
+cmake --build
 ```
