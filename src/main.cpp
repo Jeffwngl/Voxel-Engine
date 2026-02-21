@@ -23,6 +23,9 @@
 // perlin terrain
 #include "../external/perlin_gen.h"
 
+// camera helpers
+#include "../common/camera.h"
+
 
 void processInput(GLFWwindow *window);
 void mouseCallBack(GLFWwindow *window, double xPos, double yPos);
@@ -93,6 +96,8 @@ float lastFrame = 0.0f;
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+Camera camera(cameraPos, cameraUp);
 
 // mouse camera
 float yaw = -90.0f;
@@ -251,7 +256,7 @@ int main() {
         lastFrame = currentFrame;
 
         // Check for ESC key press
-        processInput(window);
+        camera.processInput(window, deltaTime);
 
         // Set background color and clear
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -263,10 +268,13 @@ int main() {
 
         shaderProgram.useShader();
         
-        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+
+        // glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        glm::mat4 view = glm::lookAt(camera.Position, camera.Position + camera.Front, camera.Up);
         shaderProgram.setMat4("view", view);
-        
-        shaderProgram.setVec3("cameraPos", cameraPos);
+
+        // shaderProgram.setVec3("cameraPos", cameraPos);
+        shaderProgram.setVec3("cameraPos", camera.Position);
 
         glm::mat4 terrainModel = glm::mat4(1.0f);
         shaderProgram.setMat4("terrainModel", terrainModel);
@@ -300,66 +308,70 @@ int main() {
 
 // Functions
 
-void processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS ) {
-        glfwSetWindowShouldClose(window, true);
-    }
-
-    const float cameraSpeed = static_cast<float>(5 * deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        cameraPos += cameraSpeed * cameraFront;
-    }
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        cameraPos -= cameraSpeed * cameraFront;
-    }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        cameraPos += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
-    }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        cameraPos -= cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
-    }
-    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-        cameraPos += cameraSpeed * cameraUp;
-    }
-    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-        cameraPos -= cameraSpeed * cameraUp;
-    }
-}
-
 void mouseCallBack(GLFWwindow *window, double xPos, double yPos) {
-    if (firstLoad) {
-        lastMouseX = xPos;
-        lastMouseY = yPos;
-        firstLoad = false;
-    }
-    // std::cout << pitch << ", " << yaw << '\n';
-    float xMouseOffset = xPos - lastMouseX;
-    float yMouseOffset = yPos - lastMouseY;
-
-    lastMouseX = xPos;
-    lastMouseY = yPos;
-
-    const float sens = 0.05f;
-    xMouseOffset *= sens;
-    yMouseOffset *= sens;
-
-    yaw += xMouseOffset;
-    pitch -= yMouseOffset;
-
-    if (pitch > 89.0f) {
-        pitch = 89.0f;
-    }
-    if (pitch < -89.0f) {
-        pitch = -89.0f;
-    }
-
-    glm::vec3 cameraDirection;
-    cameraDirection.x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-    cameraDirection.y = glm::sin(glm::radians(pitch));
-    cameraDirection.z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-
-    cameraFront = glm::normalize(cameraDirection);
+    camera.mouseCallBack(window, xPos, yPos);
 }
+
+// void processInput(GLFWwindow *window) {
+//     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS ) {
+//         glfwSetWindowShouldClose(window, true);
+//     }
+
+//     const float cameraSpeed = static_cast<float>(5 * deltaTime);
+//     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+//         cameraPos += cameraSpeed * cameraFront;
+//     }
+//     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+//         cameraPos -= cameraSpeed * cameraFront;
+//     }
+//     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+//         cameraPos += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+//     }
+//     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+//         cameraPos -= cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+//     }
+//     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+//         cameraPos += cameraSpeed * cameraUp;
+//     }
+//     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+//         cameraPos -= cameraSpeed * cameraUp;
+//     }
+// }
+
+// void mouseCallBack(GLFWwindow *window, double xPos, double yPos) {
+//     if (firstLoad) {
+//         lastMouseX = xPos;
+//         lastMouseY = yPos;
+//         firstLoad = false;
+//     }
+//     // std::cout << pitch << ", " << yaw << '\n';
+//     float xMouseOffset = xPos - lastMouseX;
+//     float yMouseOffset = yPos - lastMouseY;
+
+//     lastMouseX = xPos;
+//     lastMouseY = yPos;
+
+//     const float sens = 0.05f;
+//     xMouseOffset *= sens;
+//     yMouseOffset *= sens;
+
+//     yaw += xMouseOffset;
+//     pitch -= yMouseOffset;
+
+//     if (pitch > 89.0f) {
+//         pitch = 89.0f;
+//     }
+//     if (pitch < -89.0f) {
+//         pitch = -89.0f;
+//     }
+
+//     glm::vec3 cameraDirection;
+//     cameraDirection.x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
+//     cameraDirection.y = glm::sin(glm::radians(pitch));
+//     cameraDirection.z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
+
+//     cameraFront = glm::normalize(cameraDirection);
+// }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
