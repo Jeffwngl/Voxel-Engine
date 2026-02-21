@@ -35,43 +35,93 @@ const unsigned int SCREEN_WIDTH = 800;
 
 // TESTING GEOMETRY / LIGHT CUBE DEFINITION
 
+// float vertices[] = {
+//     -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+//     0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+//     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+//     -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+//     0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+//     0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+//     0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+//     -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+//     -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+//     -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+//     -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+//     0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+//     0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+//     0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+//     0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
+//     0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+//     0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+//     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+//     -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+//     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
+// };
+
 float vertices[] = {
-    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-    0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
+    // Back face
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
+
+    // Front face
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f, 0.0f,
+
+    // Left face
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+
+    // Right face
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f, 0.0f,
+
+    // Bottom face
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f, 1.0f,
+
+    // Top face
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 };
 
 // delta time
@@ -184,8 +234,11 @@ int main() {
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
+    glEnableVertexAttribArray(1);
 
 
     // textures
@@ -228,6 +281,7 @@ int main() {
     lightProgram.useShader();
     lightProgram.setVec3("lightColor", glm::vec3(0.0f, 1.0f, 1.0f));
     lightProgram.setMat4("projection", projection);
+    lightProgram.setVec3("lightPos", lightPos);
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
@@ -254,6 +308,9 @@ int main() {
         
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         shaderProgram.setMat4("view", view);
+
+        glm::mat4 terrainModel = glm::mat4(1.0f);
+        shaderProgram.setMat4("terrainModel", terrainModel);
 
         glBindVertexArray(VAO);
 
