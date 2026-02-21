@@ -2,6 +2,12 @@
 
 This is a project I have been using to learn more about OpenGL and C++ as well as graphics programming.
 
+## Features
+- Perlin noise terrain generation.
+![perlin](public/Perlin.png)
+- Lighting effects (Diffuse and Ambient).
+![lighting 1](public/diffuse.png)
+![lighting 1](public/ambient.png)
 ## Dependencies
 
 ### Linux

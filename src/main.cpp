@@ -212,14 +212,10 @@ int main() {
                         (void*)0); // tells openGL how to parse or analyse the buffer data, what part of the buffer data is what
     glEnableVertexAttribArray(0); // start sending data from currently bound VBO to variable in location 0 in vertex shader
     // Normal
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
-                        sizeof(Vertex),
-                        (void*)offsetof(Vertex, normal));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
     glEnableVertexAttribArray(1);
     // Tex coords
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
-                        sizeof(Vertex),
-                        (void*)offsetof(Vertex, tex));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tex));
     glEnableVertexAttribArray(2);
 
 
@@ -269,19 +265,18 @@ int main() {
 
     shaderProgram.useShader();
     shaderProgram.setInt("texture1", 0);
-    shaderProgram.setVec3("lightColor", glm::vec3(0.0f, 1.0f, 1.0f));
-    // shaderProgram.setInt("texture2", 1);
-
-    glEnable(GL_DEPTH_TEST);
+    shaderProgram.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
 
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f); // change to variables
     shaderProgram.setMat4("projection", projection);
 
     lightProgram.useShader();
-    lightProgram.setVec3("lightColor", glm::vec3(0.0f, 1.0f, 1.0f));
+    lightProgram.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
     lightProgram.setMat4("projection", projection);
     lightProgram.setVec3("lightPos", lightPos);
+
+    glEnable(GL_DEPTH_TEST);
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {

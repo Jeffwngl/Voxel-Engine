@@ -1,6 +1,6 @@
 build
 out/
-.gitignore
 .vscode/
 .DS_Store
 glad.o
+.gitignore
