@@ -17,10 +17,15 @@ set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 
 add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp)
 
+# include_directories("${CMAKE_SOURCE_DIR}/include")
 target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_SOURCE_DIR}/include") # specifies include folder
 
 target_link_libraries(${PROJECT_NAME} glfw glad OpenGL::GL)
 
 if(APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework Cocoa -framework IOKit -framework CoreVideo")
+endif()
+
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} opengl32)
 endif()

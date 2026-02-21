@@ -35,45 +35,6 @@ const unsigned int SCREEN_WIDTH = 800;
 
 // TESTING GEOMETRY / LIGHT CUBE DEFINITION
 
-// float vertices[] = {
-//     -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-//     0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-//     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-//     -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-//     0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-//     0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-//     0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-//     -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-//     -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-//     -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-//     -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-//     0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-//     0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-//     0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-//     0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-//     0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-//     0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-//     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-//     -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-//     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-//     0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-//     0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-//     -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-//     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
-// };
-
 float vertices[] = {
     // Back face
     -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f, 0.0f,
@@ -304,6 +265,8 @@ int main() {
         
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         shaderProgram.setMat4("view", view);
+        
+        shaderProgram.setVec3("cameraPos", cameraPos);
 
         glm::mat4 terrainModel = glm::mat4(1.0f);
         shaderProgram.setMat4("terrainModel", terrainModel);

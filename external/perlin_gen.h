@@ -7,8 +7,8 @@
 #include <glm/mat4x4.hpp>
 #include <glm/glm.hpp>
 
-const unsigned int CHUNK_WIDTH = 32;
-const unsigned int CHUNK_LENGTH = 32;
+const unsigned int CHUNK_WIDTH = 64;
+const unsigned int CHUNK_LENGTH = 64;
 const unsigned int CHUNK_HEIGHT = 32;
 
 // change these values to configure the generation
