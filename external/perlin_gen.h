@@ -64,7 +64,7 @@ class PerlinGen {
 
             // triangle 2
             v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
             v.push_back({glm::vec3(x + 1, y, z + 1), normal, {0.0f, 1.0f}});
         }
 
