@@ -142,7 +142,7 @@ float lastMouseY = static_cast<float>(SCREEN_HEIGHT) / 2.0f;
 bool firstLoad = true;
 
 // lighting
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(16.0f, 30.0f, 16.0f);
 
 // fps
 float fps = 0.0f;
@@ -193,7 +193,7 @@ int main() {
 
     // perlin stuff
     std::cout << "Starting up..." << '\n';
-    std::vector<Vertex> perlinTerrain = PerlinGen::generate();
+    std::vector<Vertex> perlinTerrain = PerlinGen::generate(0.1f);
 
     // vertices and shaders
     unsigned int VBO, VAO;
@@ -266,6 +266,7 @@ int main() {
     shaderProgram.useShader();
     shaderProgram.setInt("texture1", 0);
     shaderProgram.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    shaderProgram.setVec3("lightPos", lightPos);
 
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f); // change to variables
