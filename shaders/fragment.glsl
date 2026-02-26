@@ -1,12 +1,17 @@
 #version 330 core
 out vec4 FragColor;
 
-in vec2 outTexCoord;
+in vec3 outTexCoord;
 in vec3 outNormal;
 in vec3 outFragPos;
 
 uniform vec3 lightPos;
-uniform sampler2D texture1;
+
+uniform sampler2DArray textureIDs;
+
+// uniform sampler2D texture1;
+// uniform sampler2D texture2;
+// uniform sampler2D texture3;
 uniform vec3 lightColor;
 uniform vec3 cameraPos;
 
@@ -32,7 +37,8 @@ void main()
     // combine
     vec3 lighting = ambient + diffuse + specular;
 
-    vec4 texColor = texture(texture1, outTexCoord);
+    vec4 texColor = texture(textureIDs, outTexCoord);
+    
     vec3 finalColor = texColor.rgb * lighting;
 
     FragColor = vec4(finalColor, texColor.a);

@@ -16,100 +16,106 @@ float airThreshold = 0.0f;
 
 // implement block IDs for different types of blocks
 const int airID = 0;
-const int stoneID = 1;
+const int solidID = 1;
+
+// textures IDs for different faces
+const float defaultTex = 0;
+const float sideTex = 1;
+const float topTex = 2;
 
 struct Vertex {
     glm::vec3 position;
     glm::vec3 normal;
     glm::vec2 tex;
+    float texID;
 };
 
 class PerlinGen {
     private:
         // Now represents the +Y face (skyward)
-        static void addTopFace(std::vector<Vertex>& v, int x, int z, int y) {
+        static void addTopFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(0, 1, 0);
 
             // triangle 1
-            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}, ID});
 
             // triangle 2
-            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
-            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {0.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {0.0f, 1.0f}, ID});
         }
 
         // Now represents the -Y face (groundward)
-        static void addBottomFace(std::vector<Vertex>& v, int x, int z, int y) {
+        static void addBottomFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(0, -1, 0);
             
             // triangle 1
-            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x, y, z + 1), normal, {1.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x, y, z + 1), normal, {1.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {1.0f, 1.0f}, ID});
 
             // triangle 2
-            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {1.0f, 1.0f}});
-            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 1.0f}, ID});
         }
 
-        static void addRightFace(std::vector<Vertex>& v, int x, int z, int y) {
+        static void addRightFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(1, 0, 0);
             
             // triangle 1
-            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 1.0f}, ID}); // bot left
+            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {0.0f, 0.0f}, ID}); // top left
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 0.0f}, ID}); // top right
 
             // triangle 2
-            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
-            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {0.0f, 1.0f}});
+            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 1.0f}, ID}); // bot left
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 0.0f}, ID}); // top right
+            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {1.0f, 1.0f}, ID}); // bot right
         }
 
-        static void addLeftFace(std::vector<Vertex>& v, int x, int z, int y) {
+        static void addLeftFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(-1, 0, 0);
             
             // triangle 1
-            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x, y, z + 1), normal, {1.0f, 0.0f}});
-            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {0.0f, 0.0f}, ID});
 
             // triangle 2
-            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {1.0f, 1.0f}});
-            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z), normal, {1.0f, 0.0f}, ID});
         }
 
-        static void addFrontFace(std::vector<Vertex>& v, int x, int z, int y) {
+        static void addFrontFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(0, 0, 1);
             
             // triangle 1
-            v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {1.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 0.0f}, ID});
 
             // triangle 2
-            v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}});
-            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {0.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y, z + 1), normal, {1.0f, 1.0f}, ID});
         }
 
-        static void addBackFace(std::vector<Vertex>& v, int x, int z, int y) {
+        static void addBackFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(0, 0, -1);
             
             // triangle 1
-            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y, z), normal, {1.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y, z), normal, {0.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {0.0f, 0.0f}, ID});
 
             // triangle 2
-            v.push_back({glm::vec3(x, y, z), normal, {0.0f, 0.0f}});
-            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 1.0f}});
-            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 1.0f}});
+            v.push_back({glm::vec3(x, y, z), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {0.0f, 0.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z), normal, {1.0f, 0.0f}, ID});
         }
 
     public:
@@ -142,7 +148,7 @@ class PerlinGen {
                         float finalValue = noiseValue - heightGradient;
 
                         if (finalValue > airThreshold) {
-                            chunk[i][j][k] = stoneID;
+                            chunk[i][j][k] = solidID;
                         }
                         else {
                             chunk[i][j][k] = airID;
@@ -160,28 +166,41 @@ class PerlinGen {
 
                         if (blockType == 1) {
                             if (k == CHUNK_HEIGHT - 1 || chunk[i][j][k + 1] == 0) {
-                                addTopFace(v, i, j, k);
+                                addTopFace(v, i, j, k, topTex);
                             }
                             if (k == 0 || chunk[i][j][k - 1] == 0) {
-                                addBottomFace(v, i, j, k);
+                                addBottomFace(v, i, j, k, defaultTex);
                             }
+                            if ((j == CHUNK_LENGTH - 1 || chunk[i][j + 1][k] == 0) && (chunk[i][j][k + 1] == 0)) {
+                                addFrontFace(v, i, j, k, sideTex);
+                            }
+                            if ((j == 0 || chunk[i][j - 1][k] == 0) && (chunk[i][j][k + 1] == 0)) {
+                                addBackFace(v, i, j, k, sideTex);
+                            }
+                            if ((i == CHUNK_WIDTH - 1 || chunk[i + 1][j][k] == 0) && (chunk[i][j][k + 1] == 0)) {
+                                addRightFace(v, i, j, k, sideTex);
+                            }
+                            if ((i == 0 || chunk[i - 1][j][k] == 0) && (chunk[i][j][k + 1] == 0)) {
+                                addLeftFace(v, i, j, k, sideTex);
+                            }
+
                             if (j == CHUNK_LENGTH - 1 || chunk[i][j + 1][k] == 0) {
-                                addFrontFace(v, i, j, k);
+                                addFrontFace(v, i, j, k, defaultTex);
                             }
                             if (j == 0 || chunk[i][j - 1][k] == 0) {
-                                addBackFace(v, i, j, k);
+                                addBackFace(v, i, j, k, defaultTex);
                             }
                             if (i == CHUNK_WIDTH - 1 || chunk[i + 1][j][k] == 0) {
-                                addRightFace(v, i, j, k);
+                                addRightFace(v, i, j, k, defaultTex);
                             }
                             if (i == 0 || chunk[i - 1][j][k] == 0) {
-                                addLeftFace(v, i, j, k);
+                                addLeftFace(v, i, j, k, defaultTex);
                             }
                         }
                     }
                 }
             }
             
-            return v;
-        }
+        return v;
+    }
 };

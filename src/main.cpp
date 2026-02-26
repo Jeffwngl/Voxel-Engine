@@ -36,6 +36,8 @@ void calculateFPS();
 const unsigned int SCREEN_HEIGHT = 600;
 const unsigned int SCREEN_WIDTH = 800;
 
+const int TEXTURE_SIZE = 128;
+
 // TESTING GEOMETRY / LIGHT CUBE DEFINITION
 
 float vertices[] = {
@@ -183,6 +185,9 @@ int main() {
     // Tex coords
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tex));
     glEnableVertexAttribArray(2);
+    // Tex IDs
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texID));
+    glEnableVertexAttribArray(3);
 
 
     // LIGHT SOURCE
@@ -203,39 +208,135 @@ int main() {
     glEnableVertexAttribArray(1);
 
 
-    // textures
-    // 1
-    unsigned int texture1;
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
+    // // textures (move to utils file)
+    // // 1
+    // unsigned int texture1;
+    // glGenTextures(1, &texture1);
+    // glBindTexture(GL_TEXTURE_2D, texture1);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // int width, height, numChannels;
+    // unsigned char *data = stbi_load("../assets/textures/dirt1.png", &width, &height, &numChannels, 0);
+
+    // if (data) {
+    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
+    //     glGenerateMipmap(GL_TEXTURE_2D);
+    // }
+    // else {
+    //     std::cout << "No file in: " << data << std::endl;
+    // }
+
+    // stbi_image_free(data);
+
+    // // 2
+    // unsigned int texture2;
+    // glGenTextures(1, &texture2);
+    // glBindTexture(GL_TEXTURE_2D, texture2);
+
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // data = stbi_load("../assets/textures/grass-side1.png", &width, &height, &numChannels, 0);
+
+    // if (data) {
+    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
+    //     glGenerateMipmap(GL_TEXTURE_2D);
+    // }
+    // else {
+    //     std::cout << "No file in: " << data << std::endl;
+    // }
+
+    // stbi_image_free(data);
+
+    // // 3
+    // unsigned int texture3;
+    // glGenTextures(1, &texture3);
+    // glBindTexture(GL_TEXTURE_2D, texture3);
+
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+    // data = stbi_load("../assets/textures/grass-top.png", &width, &height, &numChannels, 0);
+
+    // if (data) {
+    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
+    //     glGenerateMipmap(GL_TEXTURE_2D);
+    // }
+    // else {
+    //     std::cout << "No file in: " << data << std::endl;
+    // }
+
+    // stbi_image_free(data);
+    
+    // ----------------- moving to texture array ------------------- //
+
+    unsigned int textureArray;
+    glGenTextures(1, &textureArray);
+    glBindTexture(GL_TEXTURE_2D_ARRAY, textureArray);
+
+    glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGBA8, TEXTURE_SIZE, TEXTURE_SIZE, 3, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     int width, height, numChannels;
-    unsigned char *data = stbi_load("../assets/textures/dirt.png", &width, &height, &numChannels, 0);
+    unsigned char* data;
 
+    data = stbi_load("../assets/textures/dirt1.png", &width, &height, &numChannels, 0);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
-        glGenerateMipmap(GL_TEXTURE_2D);
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, TEXTURE_SIZE, TEXTURE_SIZE, 1, GL_RGBA, GL_UNSIGNED_BYTE, data); // layer index (5th item) determines where the tex goes
+        stbi_image_free(data);
     }
     else {
         std::cout << "No file in: " << data << std::endl;
     }
 
-    stbi_image_free(data);
+    data = stbi_load("../assets/textures/grass-side3.png", &width, &height, &numChannels, 0);
+    if (data) {
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 1, TEXTURE_SIZE, TEXTURE_SIZE, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        stbi_image_free(data);
+    }
+    else {
+        std::cout << "No file in: " << data << std::endl;
+    }
+
+    data = stbi_load("../assets/textures/grass-top.png", &width, &height, &numChannels, 0);
+    if (data) {
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 2, TEXTURE_SIZE, TEXTURE_SIZE, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        stbi_image_free(data);
+    }
+    else {
+        std::cout << "No file in: " << data << std::endl;
+    }
+
+    glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
+
 
 
     shaderProgram.useShader();
-    shaderProgram.setInt("texture1", 0);
+    shaderProgram.setInt("textureIDs", 0);
+    // shaderProgram.setInt("texture1", 0);
+    // shaderProgram.setInt("texture2", 1);
+    // shaderProgram.setInt("texture3", 2);
     shaderProgram.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
     shaderProgram.setVec3("lightPos", lightPos);
 
     glm::mat4 projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f); // change to variables
+    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f);
     shaderProgram.setMat4("projection", projection);
 
     lightProgram.useShader();
@@ -244,6 +345,7 @@ int main() {
     lightProgram.setVec3("lightPos", lightPos);
 
     glEnable(GL_DEPTH_TEST);
+
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
@@ -264,16 +366,15 @@ int main() {
 
         // -- 1. terrain --
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1);
+        // glBindTexture(GL_TEXTURE_2D, texture1);
+        glBindTexture(GL_TEXTURE_2D_ARRAY, textureArray);
 
         shaderProgram.useShader();
         
 
-        // glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         glm::mat4 view = glm::lookAt(camera.Position, camera.Position + camera.Front, camera.Up);
         shaderProgram.setMat4("view", view);
 
-        // shaderProgram.setVec3("cameraPos", cameraPos);
         shaderProgram.setVec3("cameraPos", camera.Position);
 
         glm::mat4 terrainModel = glm::mat4(1.0f);
@@ -311,67 +412,6 @@ int main() {
 void mouseCallBack(GLFWwindow *window, double xPos, double yPos) {
     camera.mouseCallBack(window, xPos, yPos);
 }
-
-// void processInput(GLFWwindow *window) {
-//     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS ) {
-//         glfwSetWindowShouldClose(window, true);
-//     }
-
-//     const float cameraSpeed = static_cast<float>(5 * deltaTime);
-//     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-//         cameraPos += cameraSpeed * cameraFront;
-//     }
-//     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-//         cameraPos -= cameraSpeed * cameraFront;
-//     }
-//     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-//         cameraPos += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
-//     }
-//     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-//         cameraPos -= cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
-//     }
-//     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-//         cameraPos += cameraSpeed * cameraUp;
-//     }
-//     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-//         cameraPos -= cameraSpeed * cameraUp;
-//     }
-// }
-
-// void mouseCallBack(GLFWwindow *window, double xPos, double yPos) {
-//     if (firstLoad) {
-//         lastMouseX = xPos;
-//         lastMouseY = yPos;
-//         firstLoad = false;
-//     }
-//     // std::cout << pitch << ", " << yaw << '\n';
-//     float xMouseOffset = xPos - lastMouseX;
-//     float yMouseOffset = yPos - lastMouseY;
-
-//     lastMouseX = xPos;
-//     lastMouseY = yPos;
-
-//     const float sens = 0.05f;
-//     xMouseOffset *= sens;
-//     yMouseOffset *= sens;
-
-//     yaw += xMouseOffset;
-//     pitch -= yMouseOffset;
-
-//     if (pitch > 89.0f) {
-//         pitch = 89.0f;
-//     }
-//     if (pitch < -89.0f) {
-//         pitch = -89.0f;
-//     }
-
-//     glm::vec3 cameraDirection;
-//     cameraDirection.x = glm::cos(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-//     cameraDirection.y = glm::sin(glm::radians(pitch));
-//     cameraDirection.z = glm::sin(glm::radians(yaw)) * glm::cos(glm::radians(pitch));
-
-//     cameraFront = glm::normalize(cameraDirection);
-// }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
