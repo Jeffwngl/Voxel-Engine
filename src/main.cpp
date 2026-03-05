@@ -112,6 +112,7 @@ bool firstLoad = true;
 // lighting
 glm::vec3 lightPos(16.0f, 30.0f, 16.0f);
 glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+glm::vec3 lightDirection(-0.2f, -1.0f, -0.3f);
 
 // material properties
 float diffuseStrength = 1.0f;
@@ -272,7 +273,8 @@ int main() {
     // set once for material shader uniforms that do not change
     shaderProgram.useShader();
     shaderProgram.setInt("textureIDs", 0);
-    shaderProgram.setVec3("light.position", lightPos);
+    // shaderProgram.setVec3("light.position", lightPos);
+    shaderProgram.setVec3("light.direction", lightDirection);
     shaderProgram.setVec3("light.color", lightColor); 
 
     shaderProgram.setFloat("material.ambient", ambientStrength);
