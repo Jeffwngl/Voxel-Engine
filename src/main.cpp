@@ -111,6 +111,13 @@ bool firstLoad = true;
 
 // lighting
 glm::vec3 lightPos(16.0f, 30.0f, 16.0f);
+glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+
+// material properties
+float diffuseStrength = 1.0f;
+float ambientStrength = 0.3f;
+float specularStrength = 0.6f;
+float shineness = 32.0f;
 
 // fps
 float fps = 0.0f;
@@ -161,7 +168,7 @@ int main() {
 
     // perlin stuff
     std::cout << "Starting up..." << '\n';
-    std::vector<Vertex> perlinTerrain = PerlinGen::generate(0.1f);
+    std::vector<Vertex> perlinTerrain = PerlinGen::generate(0.05f);
 
     // vertices and shaders
     unsigned int VBO, VAO;
@@ -206,78 +213,6 @@ int main() {
 
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
     glEnableVertexAttribArray(1);
-
-
-    // // textures (move to utils file)
-    // // 1
-    // unsigned int texture1;
-    // glGenTextures(1, &texture1);
-    // glBindTexture(GL_TEXTURE_2D, texture1);
-
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // int width, height, numChannels;
-    // unsigned char *data = stbi_load("../assets/textures/dirt1.png", &width, &height, &numChannels, 0);
-
-    // if (data) {
-    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
-    //     glGenerateMipmap(GL_TEXTURE_2D);
-    // }
-    // else {
-    //     std::cout << "No file in: " << data << std::endl;
-    // }
-
-    // stbi_image_free(data);
-
-    // // 2
-    // unsigned int texture2;
-    // glGenTextures(1, &texture2);
-    // glBindTexture(GL_TEXTURE_2D, texture2);
-
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // data = stbi_load("../assets/textures/grass-side1.png", &width, &height, &numChannels, 0);
-
-    // if (data) {
-    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
-    //     glGenerateMipmap(GL_TEXTURE_2D);
-    // }
-    // else {
-    //     std::cout << "No file in: " << data << std::endl;
-    // }
-
-    // stbi_image_free(data);
-
-    // // 3
-    // unsigned int texture3;
-    // glGenTextures(1, &texture3);
-    // glBindTexture(GL_TEXTURE_2D, texture3);
-
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    // data = stbi_load("../assets/textures/grass-top.png", &width, &height, &numChannels, 0);
-
-    // if (data) {
-    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); // change to GL_RGB for container.jpg
-    //     glGenerateMipmap(GL_TEXTURE_2D);
-    // }
-    // else {
-    //     std::cout << "No file in: " << data << std::endl;
-    // }
-
-    // stbi_image_free(data);
     
     // ----------------- moving to texture array ------------------- //
 
@@ -325,22 +260,24 @@ int main() {
 
     glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
 
-
-
+    // set once for material shader uniforms that do not change
     shaderProgram.useShader();
     shaderProgram.setInt("textureIDs", 0);
-    // shaderProgram.setInt("texture1", 0);
-    // shaderProgram.setInt("texture2", 1);
-    // shaderProgram.setInt("texture3", 2);
-    shaderProgram.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-    shaderProgram.setVec3("lightPos", lightPos);
+    shaderProgram.setVec3("light.position", lightPos);
+    shaderProgram.setVec3("light.color", lightColor); 
 
+    shaderProgram.setFloat("material.ambient", ambientStrength);
+    shaderProgram.setFloat("material.diffuse", diffuseStrength);
+    shaderProgram.setFloat("material.specular", specularStrength);
+    shaderProgram.setFloat("material.shineness", shineness);
+
+    // set once for light shader uniforms that do not change
     glm::mat4 projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f);
     shaderProgram.setMat4("projection", projection);
 
     lightProgram.useShader();
-    lightProgram.setVec3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+    lightProgram.setVec3("lightColor", lightColor);
     lightProgram.setMat4("projection", projection);
     lightProgram.setVec3("lightPos", lightPos);
 
@@ -366,12 +303,27 @@ int main() {
 
         // -- 1. terrain --
         glActiveTexture(GL_TEXTURE0);
-        // glBindTexture(GL_TEXTURE_2D, texture1);
         glBindTexture(GL_TEXTURE_2D_ARRAY, textureArray);
 
+        // -- 1. main shader -- //
         shaderProgram.useShader();
         
+        // light
+        // shaderProgram.setVec3("light.position", lightPos);
+        // shaderProgram.setVec3("light.color", lightColor); 
+        // glm::vec3 diffuseColor = lightColor * diffuseStrength;
+        // glm::vec3 ambientColor = diffuseColor * ambientStrength;
+        // shaderProgram.setFloat("light.ambient", ambientStrength);
+        // shaderProgram.setFloat("light.diffuse", diffuseStrength);
+        // shaderProgram.setFloat("light.specular", specularStrength);
 
+        // material
+        // shaderProgram.setFloat("material.ambient", ambientStrength);
+        // shaderProgram.setFloat("material.diffuse", diffuseStrength);
+        // shaderProgram.setFloat("material.specular", specularStrength);
+        // shaderProgram.setFloat("material.shineness", shineness);
+
+        // keep working here >>>>
         glm::mat4 view = glm::lookAt(camera.Position, camera.Position + camera.Front, camera.Up);
         shaderProgram.setMat4("view", view);
 
@@ -381,14 +333,16 @@ int main() {
         shaderProgram.setMat4("terrainModel", terrainModel);
 
         glBindVertexArray(VAO);
-
         glDrawArrays(GL_TRIANGLES, 0, perlinTerrain.size());
 
-        // -- 2. light cube -- 
+        // -- 2. light cube -- //
         lightProgram.useShader();
-        lightProgram.setMat4("view", view);
 
-        glm::mat4 lightModel = glm::mat4(1.0f);
+        // view projection transformation
+        lightProgram.setMat4("view", view);
+        
+        // world transformation
+        glm::mat4 lightModel = glm::mat4(1.0f); // can move outide
         lightModel = glm::translate(lightModel, lightPos);
         lightProgram.setMat4("lightModel", lightModel);
 
