@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
+#include <random>
 
 #define STB_PERLIN_IMPLEMENTATION
 #include <stb_perlin.h>
@@ -22,6 +23,10 @@ const int solidID = 1;
 const float defaultTex = 0;
 const float sideTex = 1;
 const float topTex = 2;
+const float flowerTex = 3;
+
+// chance of flower tile generating
+const float chance = 0.06f;
 
 struct Vertex {
     glm::vec3 position;
@@ -32,22 +37,45 @@ struct Vertex {
 
 class PerlinGen {
     private:
-        // Now represents the +Y face (skyward)
+        // represents the +Y face (skyward)
         static void addTopFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(0, 1, 0);
 
+            static std::mt19937 gen(std::random_device{}()); // only gets called once static
+            static std::uniform_int_distribution<int> dist(0, 3); // 0,1,2,3
+            
+            int r = ID == 3 ? dist(gen) : 0;
+
+            glm::vec2 uv[4] = {
+                {0.0f, 0.0f}, // bottom-left
+                {1.0f, 0.0f}, // bottom-right
+                {1.0f, 1.0f}, // top-right
+                {0.0f, 1.0f}  // top-left
+            };
+
+            glm::vec2 rotatedUV[4];
+
+            for (int i = 0; i < 4; ++i) {
+                switch(r) {
+                    case 0: rotatedUV[i] = uv[i]; break; // 0
+                    case 1: rotatedUV[i] = glm::vec2(1.0f - uv[i].y, uv[i].x); break; // 90
+                    case 2: rotatedUV[i] = glm::vec2(1.0f - uv[i].x, 1.0f - uv[i].y); break; // 180
+                    case 3: rotatedUV[i] = glm::vec2(uv[i].y, 1.0f - uv[i].x); break; // 270
+                }
+            }
+
             // triangle 1
-            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}, ID});
-            v.push_back({glm::vec3(x + 1, y + 1, z), normal, {1.0f, 0.0f}, ID});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z), normal, rotatedUV[0], ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z), normal, rotatedUV[1], ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, rotatedUV[2], ID});
 
             // triangle 2
-            v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}, ID});
-            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, {1.0f, 1.0f}, ID});
-            v.push_back({glm::vec3(x, y + 1, z + 1), normal, {0.0f, 1.0f}, ID});
+            v.push_back({glm::vec3(x, y + 1, z), normal, rotatedUV[0], ID});
+            v.push_back({glm::vec3(x + 1, y + 1, z + 1), normal, rotatedUV[2], ID});
+            v.push_back({glm::vec3(x, y + 1, z + 1), normal, rotatedUV[3], ID});
         }
 
-        // Now represents the -Y face (groundward)
+        // represents the -Y face (groundward)
         static void addBottomFace(std::vector<Vertex>& v, int x, int z, int y, float ID) {
             glm::vec3 normal = glm::vec3(0, -1, 0);
             
@@ -134,6 +162,9 @@ class PerlinGen {
                 )
             );
 
+            // random flower texture generator
+            std::mt19937 gen(std::random_device{}());
+
             for (int i = 0; i < CHUNK_WIDTH; i++) {
                 for (int j = 0; j < CHUNK_LENGTH; j++) {
                     for (int k = 0; k < CHUNK_HEIGHT; k++) {
@@ -166,7 +197,13 @@ class PerlinGen {
 
                         if (blockType == 1) {
                             if (k == CHUNK_HEIGHT - 1 || chunk[i][j][k + 1] == 0) {
-                                addTopFace(v, i, j, k, topTex);
+                                float r = std::uniform_real_distribution<float>(0.0f, 1.0f)(gen);
+                                if (r < chance) {
+                                    addTopFace(v, i, j, k, flowerTex);
+                                }
+                                else {
+                                    addTopFace(v, i, j, k, topTex);   
+                                }
                             }
                             if (k == 0 || chunk[i][j][k - 1] == 0) {
                                 addBottomFace(v, i, j, k, defaultTex);

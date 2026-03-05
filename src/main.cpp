@@ -220,7 +220,7 @@ int main() {
     glGenTextures(1, &textureArray);
     glBindTexture(GL_TEXTURE_2D_ARRAY, textureArray);
 
-    glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGBA8, TEXTURE_SIZE, TEXTURE_SIZE, 3, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+    glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGBA8, TEXTURE_SIZE, TEXTURE_SIZE, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -252,6 +252,15 @@ int main() {
     data = stbi_load("../assets/textures/grass-top.png", &width, &height, &numChannels, 0);
     if (data) {
         glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 2, TEXTURE_SIZE, TEXTURE_SIZE, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        stbi_image_free(data);
+    }
+    else {
+        std::cout << "No file in: " << data << std::endl;
+    }
+
+    data = stbi_load("../assets/textures/flowers.png", &width, &height, &numChannels, 0);
+    if (data) {
+        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 3, TEXTURE_SIZE, TEXTURE_SIZE, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
         stbi_image_free(data);
     }
     else {
