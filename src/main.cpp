@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <unordered_set>
 #include <glad/glad.h>
 #include <glfw/include/GLFW/glfw3.h>
 
@@ -21,22 +22,30 @@
 #include "../common/shader.h"
 
 // perlin terrain
-#include "../external/perlin_gen.h"
+// #include "../external/perlin_gen.h" // TODO: remove later
+
+// chunk generation
+#include "../external/chunk_gen.hpp"
 
 // camera helpers
 #include "../common/camera.h"
 
-
+// Function Definitions
 void processInput(GLFWwindow *window);
 void mouseCallBack(GLFWwindow *window, double xPos, double yPos);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void calculateFPS();
 
 
+typedef long long ll;
+
 const unsigned int SCREEN_HEIGHT = 600;
 const unsigned int SCREEN_WIDTH = 800;
 
 const int TEXTURE_SIZE = 128;
+
+const int CHUNK_SIZE = 16;
+const int RENDER_DISTANCE = 4;
 
 // TESTING GEOMETRY / LIGHT CUBE DEFINITION
 
@@ -95,7 +104,7 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // camera setup
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraPos = glm::vec3(0.0f, 32.0f, 0.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -110,13 +119,13 @@ float lastMouseY = static_cast<float>(SCREEN_HEIGHT) / 2.0f;
 bool firstLoad = true;
 
 // lighting
-glm::vec3 lightPos(16.0f, 30.0f, 16.0f);
+glm::vec3 lightPos(64.0f, 64.0f, 64.0f);
 glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
 glm::vec3 lightDirection(-0.2f, -1.0f, -0.3f);
 
 // material properties
 float diffuseStrength = 1.0f;
-float ambientStrength = 0.3f;
+float ambientStrength = 0.5f;
 float specularStrength = 0.6f;
 float shineness = 32.0f;
 
@@ -124,6 +133,9 @@ float shineness = 32.0f;
 float fps = 0.0f;
 double lastTime = glfwGetTime();
 int frameCount = 0;
+
+// Chunk based rendering stuff
+ChunkManager chunkManager;
 
 
 int main() {
@@ -167,6 +179,7 @@ int main() {
     Shader shaderProgram("../shaders/vertex.glsl", "../shaders/fragment.glsl");
     Shader lightProgram("../shaders/light_vertex.glsl", "../shaders/light_fragment.glsl");
 
+    /** 
     // perlin stuff
     std::cout << "Starting up..." << '\n';
     std::vector<Vertex> perlinTerrain = PerlinGen::generate(0.05f);
@@ -196,7 +209,7 @@ int main() {
     // Tex IDs
     glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texID));
     glEnableVertexAttribArray(3);
-
+    */
 
     // LIGHT SOURCE
     unsigned int lightVAO, lightVBO;
@@ -215,7 +228,7 @@ int main() {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
     glEnableVertexAttribArray(1);
     
-    // ----------------- moving to texture array ------------------- //
+    // ----------------- Load textures into texture array ------------------- //
 
     unsigned int textureArray;
     glGenTextures(1, &textureArray);
@@ -273,8 +286,8 @@ int main() {
     // set once for material shader uniforms that do not change
     shaderProgram.useShader();
     shaderProgram.setInt("textureIDs", 0);
-    // shaderProgram.setVec3("light.position", lightPos);
-    shaderProgram.setVec3("light.direction", lightDirection);
+    shaderProgram.setVec3("light.position", lightPos);
+    // shaderProgram.setVec3("light.direction", lightDirection);
     shaderProgram.setVec3("light.color", lightColor); 
 
     shaderProgram.setFloat("material.ambient", ambientStrength);
@@ -292,7 +305,11 @@ int main() {
     lightProgram.setMat4("projection", projection);
     lightProgram.setVec3("lightPos", lightPos);
 
+
     glEnable(GL_DEPTH_TEST);
+    // glEnable(GL_CULL_FACE);
+    // glCullFace(GL_BACK);
+    // glFrontFace(GL_CW);
 
 
     // Rendering loop
@@ -319,20 +336,13 @@ int main() {
         // -- 1. main shader -- //
         shaderProgram.useShader();
         
-        // light
-        // shaderProgram.setVec3("light.position", lightPos);
-        // shaderProgram.setVec3("light.color", lightColor); 
-        // glm::vec3 diffuseColor = lightColor * diffuseStrength;
-        // glm::vec3 ambientColor = diffuseColor * ambientStrength;
-        // shaderProgram.setFloat("light.ambient", ambientStrength);
-        // shaderProgram.setFloat("light.diffuse", diffuseStrength);
-        // shaderProgram.setFloat("light.specular", specularStrength);
+        // -- 2. chunk stuff -- //
+        int playerChunk_x = static_cast<int>(std::floor(camera.Position.x / CHUNK_SIZE));
+        int playerChunk_z = static_cast<int>(std::floor(camera.Position.z / CHUNK_SIZE));
 
-        // material
-        // shaderProgram.setFloat("material.ambient", ambientStrength);
-        // shaderProgram.setFloat("material.diffuse", diffuseStrength);
-        // shaderProgram.setFloat("material.specular", specularStrength);
-        // shaderProgram.setFloat("material.shineness", shineness);
+        chunkManager.update(playerChunk_x, playerChunk_z, RENDER_DISTANCE);
+        chunkManager.uploadMesh();
+        chunkManager.render();
 
         // keep working here >>>>
         glm::mat4 view = glm::lookAt(camera.Position, camera.Position + camera.Front, camera.Up);
@@ -342,9 +352,9 @@ int main() {
 
         glm::mat4 terrainModel = glm::mat4(1.0f);
         shaderProgram.setMat4("terrainModel", terrainModel);
-
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, perlinTerrain.size());
+        
+        // glBindVertexArray(VAO);
+        // glDrawArrays(GL_TRIANGLES, 0, perlinTerrain.size());
 
         // -- 2. light cube -- //
         lightProgram.useShader();

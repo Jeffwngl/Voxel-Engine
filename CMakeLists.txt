@@ -15,7 +15,7 @@ add_library(glad STATIC src/glad.c) # build glad
 
 set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 
-add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp)
+add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp external/chunk_gen.cpp external/perlin_gen.cpp)
 
 # include_directories("${CMAKE_SOURCE_DIR}/include")
 target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_SOURCE_DIR}/include") # specifies include folder
