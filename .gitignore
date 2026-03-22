@@ -4,6 +4,4 @@ out/
 .DS_Store
 glad.o
 .cache
-docs
-deprecated
 .gitignore
