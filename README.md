@@ -58,6 +58,6 @@ cmake --build .
 
 ## Screenshots
 
-![perlin](public/Perlin.png)
-![lighting 1](public/diffuse.png)
-![lighting 1](public/Lighting.png)
+![perlin](/public/Perlin.png?raw=true)
+![lighting 1](public/diffuse.png?raw=true)
+![lighting 1](public/Lighting.png?raw=true)
