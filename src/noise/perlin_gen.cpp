@@ -7,6 +7,25 @@
 #include <glm/mat4x4.hpp>
 #include <glm/glm.hpp>
 
+/*
+Process
+
+This algorithm will iterate through all the blocks in a chunk, depending on
+the perlin noise generation function, it will determine whether it is a solid
+block or an air block.
+
+The chunk data structure stores all the IDs of the blocks within the chunk,
+the algorithm iterates through the chunk data and appends the vertex mesh data
+based on the block ID to the std::vector v which is then uploaded to the buffer.
+
+Optimizations
+A 1D vector hash is used to optimize storage and lookup.
+*/
+
+/**
+ * Define size constraints for a default chunk here
+ * A 16x16x32 chunk is used as a default
+ */
 const unsigned int CHUNK_WIDTH = 16;
 const unsigned int CHUNK_LENGTH = 16;
 const unsigned int CHUNK_HEIGHT = 32;
@@ -147,13 +166,12 @@ void PerlinGen::addBackFace(std::vector<Vertex>& v, int x, int z, int y, float I
  * @return A vector of vertices storing the generated chunk.
  */
 std::vector<Vertex> PerlinGen::generate(float scale, int chunkX, int chunkZ) {
-
     // result output
     std::vector<Vertex>v;
 
     // initialize chunk
     // structure is [x][z][y] to keep y as the vertical axis
-    std::vector<std::vector<std::vector<int>>>chunk(
+    std::vector<std::vector<std::vector<int>>>chunk( // TODO: change to flat array
         CHUNK_WIDTH, std::vector<std::vector<int>>(
             CHUNK_LENGTH, std::vector<int> (
                 CHUNK_HEIGHT, 0
@@ -161,8 +179,19 @@ std::vector<Vertex> PerlinGen::generate(float scale, int chunkX, int chunkZ) {
         )
     );
 
+    // Helper to safely check if a block is air, treating out of bounds as air
+    auto isAir = [&](int x, int z, int y) -> bool {
+        if (x < 0 || x >= CHUNK_WIDTH ||
+            z < 0 || z >= CHUNK_LENGTH ||
+            y < 0 || y >= CHUNK_HEIGHT) {
+            return true;  // treat out of bounds as air, always render face
+        }
+        return chunk[x][z][y] == airID;
+    };
+
     // random flower texture generator
     std::mt19937 gen(std::random_device{}());
+    std::uniform_real_distribution<float> dist(0.0f, 1.0f);
 
     // TODO: remove edge of chunk faces
     for (int i = 0; i < CHUNK_WIDTH; i++) {
@@ -187,7 +216,7 @@ std::vector<Vertex> PerlinGen::generate(float scale, int chunkX, int chunkZ) {
             }
         }
     }
-
+    // TODO: fix face generation on chunk edges
     for (int i = 0; i < CHUNK_WIDTH; i++) {
         for (int j = 0; j < CHUNK_LENGTH; j++) {
             for (int k = 0; k < CHUNK_HEIGHT; k++) {
@@ -195,47 +224,40 @@ std::vector<Vertex> PerlinGen::generate(float scale, int chunkX, int chunkZ) {
 
                 int worldX = i + chunkX * CHUNK_WIDTH;
                 int worldZ = j + chunkZ * CHUNK_LENGTH;
-                int worldY = k;
+                // int worldY = k;
 
                 if (blockType == 0) continue;
 
                 if (blockType == 1) {
-                    if (k == CHUNK_HEIGHT - 1 || chunk[i][j][k + 1] == 0) {
-                        float r = std::uniform_real_distribution<float>(0.0f, 1.0f)(gen);
-                        if (r < chance) {
-                            addTopFace(v, worldX, worldZ, k, flowerTex);
-                        }
-                        else {
-                            addTopFace(v, worldX, worldZ, k, topTex);   
-                        }
+                    if (isAir(i, j, k + 1)) {
+                        float r = dist(gen);
+                        addTopFace(v, worldX, worldZ, k, r < chance ? flowerTex : topTex);
                     }
-                    if (k == 0 || chunk[i][j][k - 1] == 0) {
+                    // bottom
+                    if (isAir(i, j, k - 1)) {
                         addBottomFace(v, worldX, worldZ, k, defaultTex);
                     }
-                    if ((j == CHUNK_LENGTH - 1 || chunk[i][j + 1][k] == 0) && (chunk[i][j][k + 1] == 0)) {
-                        addFrontFace(v, worldX, worldZ, k, sideTex);
+                    // front (+z)
+                    if (isAir(i, j + 1, k)) {
+                        float tex = chunk[i][j][k + 1] == 0 ? sideTex : defaultTex;  // grass if exposed top
+                        // but need bounds check for k+1 too:
+                        bool topExposed = (k + 1 >= CHUNK_HEIGHT) || chunk[i][j][k + 1] == airID;
+                        addFrontFace(v, worldX, worldZ, k, topExposed ? sideTex : defaultTex);
                     }
-                    if ((j == 0 || chunk[i][j - 1][k] == 0) && (chunk[i][j][k + 1] == 0)) {
-                        addBackFace(v, worldX, worldZ, k, sideTex);
+                    // back (-z)
+                    if (isAir(i, j - 1, k)) {
+                        bool topExposed = (k + 1 >= CHUNK_HEIGHT) || chunk[i][j][k + 1] == airID;
+                        addBackFace(v, worldX, worldZ, k, topExposed ? sideTex : defaultTex);
                     }
-                    if ((i == CHUNK_WIDTH - 1 || chunk[i + 1][j][k] == 0) && (chunk[i][j][k + 1] == 0)) {
-                        addRightFace(v, worldX, worldZ, k, sideTex);
+                    // right (+x)
+                    if (isAir(i + 1, j, k)) {
+                        bool topExposed = (k + 1 >= CHUNK_HEIGHT) || chunk[i][j][k + 1] == airID;
+                        addRightFace(v, worldX, worldZ, k, topExposed ? sideTex : defaultTex);
                     }
-                    if ((i == 0 || chunk[i - 1][j][k] == 0) && (chunk[i][j][k + 1] == 0)) {
-                        addLeftFace(v, worldX, worldZ, k, sideTex);
-                    }
-
-                    if (j == CHUNK_LENGTH - 1 || chunk[i][j + 1][k] == 0) {
-                        addFrontFace(v, worldX, worldZ, k, defaultTex);
-                    }
-                    if (j == 0 || chunk[i][j - 1][k] == 0) {
-                        addBackFace(v, worldX, worldZ, k, defaultTex);
-                    }
-                    if (i == CHUNK_WIDTH - 1 || chunk[i + 1][j][k] == 0) {
-                        addRightFace(v, worldX, worldZ, k, defaultTex);
-                    }
-                    if (i == 0 || chunk[i - 1][j][k] == 0) {
-                        addLeftFace(v, worldX, worldZ, k, defaultTex);
+                    // left (-x)
+                    if (isAir(i - 1, j, k)) {
+                        bool topExposed = (k + 1 >= CHUNK_HEIGHT) || chunk[i][j][k + 1] == airID;
+                        addLeftFace(v, worldX, worldZ, k, topExposed ? sideTex : defaultTex);
                     }
                 }
             }

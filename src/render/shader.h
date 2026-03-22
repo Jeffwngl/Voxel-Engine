@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "utils.h"
+#include "../utils/utils.h"
 
 #include <glad/glad.h>
 #include <string>
@@ -58,8 +58,7 @@ class Shader {
         void setMat4(const std::string &name, const glm::mat4 &mat) const {
             glUniformMatrix4fv(glGetUniformLocation(shaderID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
         }
-        void setVec3(const std::string &name, const glm::vec3 &value) const
-        { 
+        void setVec3(const std::string &name, const glm::vec3 &value) const { 
             glUniform3fv(glGetUniformLocation(shaderID, name.c_str()), 1, &value[0]); 
         }
 };

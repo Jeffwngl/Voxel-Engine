@@ -11,14 +11,26 @@ find_package(OpenGL REQUIRED) # find openGL
 add_subdirectory(include/glfw) # build glfw
 # find_package(glfw REQUIRED) # use this if glfw is installed on your system
 
-add_library(glad STATIC src/glad.c) # build glad
+add_library(glad STATIC src/external/glad.c) # build glad
 
 set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 
-add_executable("${CMAKE_PROJECT_NAME}" src/main.cpp external/chunk_gen.cpp external/perlin_gen.cpp)
+add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
 
-# include_directories("${CMAKE_SOURCE_DIR}/include")
-target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_SOURCE_DIR}/include") # specifies include folder
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+    src/core/application.cpp
+    src/world/chunk_gen.cpp
+    src/noise/perlin_gen.cpp
+    src/input/camera.cpp
+    src/external/glad.c
+    src/external/stb_image.cpp
+)
+
+target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC 
+    "${CMAKE_SOURCE_DIR}/include"
+    "${CMAKE_SOURCE_DIR}/include/glfw/include"
+    "${CMAKE_SOURCE_DIR}/src"
+) # specifies include folder
 
 target_link_libraries(${PROJECT_NAME} glfw glad OpenGL::GL)
 

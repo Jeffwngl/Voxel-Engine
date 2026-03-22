@@ -1,12 +1,39 @@
+#include "../noise/perlin_gen.hpp"
 #include "chunk_gen.hpp"
-#include "perlin_gen.hpp"
 
 #include <math.h>
+#include <iostream>
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+/*
+Process
+
+1. Determine the set of chunk coordinates that should be visible
+   based on the player's current chunk position and render distance.
+   This forms a square grid of chunks centered around the player.
+
+2. Iterate over this target grid and check whether each required
+   chunk already exists in the world map.
+   - If a chunk is missing, generate its terrain data using Perlin noise
+     and insert it into the world container.
+   - Newly created chunks are marked as not ready (buffers not uploaded yet).
+
+3. Iterate through all currently loaded chunks in the world.
+   - Identify chunks that fall outside the render distance.
+   - For those chunks, we delete their OpenGL resources (VAO/VBO) 
+     if they were uploaded we remove them from the world map to free memory.
+
+4. After update():
+   - uploadMesh() uploads vertex data of newly generated chunks to the GPU
+     and sets up their VAO/VBO state.
+
+5. During render():
+   - Only chunks marked as ready are drawn.
+   - Each chunk binds its VAO and issues a draw call.
+*/
 
 
 /**
@@ -70,10 +97,16 @@ void ChunkManager::update(const int playerChunk_x, const int playerChunk_z, cons
 }
 
 void ChunkManager::uploadMesh() {
+    int drawn = 0;
     for (auto& [key, chunk] : world) {
+        /* Debug */
+        // std::cout << "Chunk ready: " << chunk.ready << " vertices: " << chunk.vertices.size() << '\n';
         if (!chunk.ready && !chunk.vertices.empty()) {
             glGenVertexArrays(1, &chunk.VAO);
             glGenBuffers(1, &chunk.VBO);
+
+            /* Debug */
+            drawn++;
 
             glBindVertexArray(chunk.VAO);
             glBindBuffer(GL_ARRAY_BUFFER, chunk.VBO);
@@ -102,15 +135,15 @@ void ChunkManager::uploadMesh() {
             chunk.ready = true;
         }
     }
+    /* Debug */
+    // std::cout << "Drew " << drawn << " chunks, " << world.size() << " total\n";
 }
 
 void ChunkManager::render() {
     for (auto& [key, chunk] : world) {
         if (!chunk.ready) continue;
 
-        glm::mat4 model = glm::mat4(1.0f);
-        // Offset the chunk in world space
-        //model = glm::translate(model, glm::vec3(chunk.coord.x * 16, 0.0f, chunk.coord.y * 16));
+        // glm::mat4 model = glm::mat4(1.0f);
 
         glBindVertexArray(chunk.VAO);
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(chunk.vertices.size()));

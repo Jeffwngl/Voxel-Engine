@@ -1,3 +1,8 @@
+/**
+ * utils.h
+ * General utility functions
+ */
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -7,7 +12,7 @@
 #include <glfw/include/GLFW/glfw3.h>
 
 namespace utils {
-    std::string readFile(const char* filePath) {
+    inline std::string readFile(const char* filePath) {
         std::ifstream file(filePath);
         std::stringstream buffer;
 
@@ -21,7 +26,7 @@ namespace utils {
         return buffer.str();
     }
 
-    void checkErrors(unsigned int ID, std::string type) {
+    inline void checkErrors(unsigned int ID, std::string type) {
         int success;
         char infoLog[512];
         if (type != "PROGRAM") {

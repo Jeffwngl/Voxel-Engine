@@ -2,7 +2,7 @@
 #define CHUNK_H
 // TODO: get rid of this file
 #include <glm/glm.hpp>
-#include "perlin_gen.hpp"
+#include "../noise/perlin_gen.hpp"
 
 /**
  * @struct Chunk
