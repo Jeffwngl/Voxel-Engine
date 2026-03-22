@@ -59,6 +59,5 @@ cmake --build .
 ## Screenshots
 
 ![perlin](public/Perlin.png)
-- Lighting effects (Diffuse and Ambient).
 ![lighting 1](public/diffuse.png)
 ![lighting 1](public/Lighting.png)
