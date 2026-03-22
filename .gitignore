@@ -1,7 +1,30 @@
-build
+# Build directories
+build/
 out/
+cmake-build-*/
+.cache/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# Compiled binaries
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+Voxel-Engine
+
+# VS Code
 .vscode/
+*.code-workspace
+
+# macOS
 .DS_Store
-glad.o
-.cache
-.gitignore

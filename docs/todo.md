@@ -1,0 +1,4 @@
+- Fix perlin gen to render faces on edge of chunk by generating both chunks.
+- move logic from main to game.
+- Fix YAW PITCH stuff from camera class
+- Get rid of chunk.h
