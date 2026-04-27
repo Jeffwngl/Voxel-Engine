@@ -116,6 +116,7 @@ bool Game::init() {
     glfwMakeContextCurrent(window);  // Make context current
     glfwSetFramebufferSizeCallback(window, onFrameBufferResize);
     glfwSetCursorPosCallback(window, onMouseMove);
+    // if (glfwRawMouseMotionSupported()) glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN); // Wslg doesnt support GLFW_CURSOR_DISABLED
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 

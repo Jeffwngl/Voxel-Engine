@@ -56,6 +56,24 @@ cmake --build .
 ./Voxel-Engine
 ```
 
+### For Windows Users
+
+To enable support for `GLFW_CURSOR_DISABLED` which does not work on the WSLg compatibility layer, you need to compile and run the program natively on windows as an `.exe`, you can use any C++ windows toolchain e.g. Install MSYS2:
+
+```
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja
+```
+- Then open the `MSYS2 MINGW64` terminal and build the project as normal:
+```
+mkdir build && cd build
+cmake .. -G "Ninja"
+ninja
+
+./Voxel-Engine.exe
+```
+
+For those who wish to still run this via WSL, you can install the dependencies using `ubuntu-deps.sh`.
+
 ## Screenshots
 
 ![perlin](/public/Perlin.png?raw=true)
