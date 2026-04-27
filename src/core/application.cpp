@@ -167,6 +167,9 @@ void Game::configureShaders() {
     terrainShader->setFloat("material.diffuse", diffuseStrength);
     terrainShader->setFloat("material.specular", specularStrength);
     terrainShader->setFloat("material.shininess", shininess);
+    terrainShader->setFloat("fog.fogStart", fogStart);
+    terrainShader->setFloat("fog.fogEnd", fogEnd);
+    terrainShader->setVec3("fog.fogColor", fogColor);
 
     GLint count;
     glGetProgramiv(terrainShader->shaderID, GL_ACTIVE_UNIFORMS, &count);

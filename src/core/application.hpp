@@ -86,9 +86,14 @@ class Game {
         float specularStrength = 0.6f;
         float shininess = 32.0f;
         glm::vec3 lightPos { 64.0f, 64.0f, 64.0f };
-        glm::vec3 lightColor {  1.0f,  1.0f,  1.0f };
+        glm::vec3 lightColor { 1.0f, 1.0f, 1.0f };
 
         glm::mat4 projection { 1.0f };
+
+        /* Fog parameters */
+        float fogStart = 50.0f;
+        float fogEnd = 100.0f;
+        glm::vec3 fogColor { 1.0f, 1.0f, 1.0f };
 
     public:
         GLFWwindow* window;

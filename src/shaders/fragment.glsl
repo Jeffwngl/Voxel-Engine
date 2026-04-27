@@ -13,11 +13,17 @@ struct Light {
     vec3 position;
 };
 
+struct Fog {
+    float fogStart;
+    float fogEnd;
+    vec3 fogColor;
+};
+
 in vec3 outTexCoord;
 in vec3 outNormal;
 in vec3 outFragPos;
 
-// uniform vec3 lightPos;
+// uniform vec3 lightPos; // may need for sun later
 
 uniform sampler2DArray textureIDs;
 
@@ -25,6 +31,7 @@ uniform sampler2DArray textureIDs;
 uniform vec3 cameraPos;
 uniform Material material;
 uniform Light light;
+uniform Fog fog;
 
 void main()
 {
@@ -45,12 +52,16 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = material.specular * spec * light.color;
 
+    // fog
+    float dist = length(outFragPos - cameraPos);
+    float fogFactor = clamp((dist - fog.fogStart) / (fog.fogEnd - fog.fogStart), 0.0, 1.0);
+
     // combine
     vec3 lighting = ambient + diffuse + specular;
 
     vec4 texColor = texture(textureIDs, outTexCoord);
     
-    vec3 finalColor = texColor.rgb * lighting;
+    vec3 finalColor = mix(texColor.rgb * lighting, fog.fogColor, fogFactor);
 
     FragColor = vec4(finalColor, texColor.a);
 }
