@@ -170,6 +170,16 @@ void Game::configureShaders() {
     terrainShader->setFloat("fog.fogStart", fogStart);
     terrainShader->setFloat("fog.fogEnd", fogEnd);
     terrainShader->setVec3("fog.fogColor", fogColor);
+    // scattering testing
+    // terrainShader->setVec3("betaRayleigh", glm::vec3(1.0e-3f, 2.0e-3f, 4.0e-3f));
+    // terrainShader->setVec3("betaMie", glm::vec3(5e-4f, 5e-4f, 5e-4f));
+    // terrainShader->setFloat("g", -0.75f);
+    // terrainShader->setFloat("Esun", 15.0f);
+terrainShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
+terrainShader->setVec3("betaMie",      glm::vec3(4e-4f, 4e-4f, 4e-4f));
+terrainShader->setFloat("g",           -0.75f);
+terrainShader->setFloat("Esun",        20.0f);
+terrainShader->setVec3("sunDir",       glm::normalize(glm::vec3(0.5f, 1.0f, 0.3f)));
 
     GLint count;
     glGetProgramiv(terrainShader->shaderID, GL_ACTIVE_UNIFORMS, &count);

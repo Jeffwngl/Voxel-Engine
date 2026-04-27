@@ -33,7 +33,7 @@ inline constexpr unsigned int SCREEN_WIDTH = 800;
 inline constexpr unsigned int SCREEN_HEIGHT = 600;
 inline constexpr int TEXTURE_SIZE = 128;
 inline constexpr int CHUNK_SIZE = 16;
-inline constexpr int RENDER_DISTANCE = 4;
+inline constexpr int RENDER_DISTANCE = 5;
 
 class Game {
     private:
@@ -91,7 +91,7 @@ class Game {
         glm::mat4 projection { 1.0f };
 
         /* Fog parameters */
-        float fogStart = 50.0f;
+        float fogStart = 70.0f;
         float fogEnd = 100.0f;
         glm::vec3 fogColor { 1.0f, 1.0f, 1.0f };
 

@@ -22,6 +22,8 @@ struct Fog {
 in vec3 outTexCoord;
 in vec3 outNormal;
 in vec3 outFragPos;
+in vec3 outFex; // change
+in vec3 outLin; // change
 
 // uniform vec3 lightPos; // may need for sun later
 
@@ -60,8 +62,12 @@ void main()
     vec3 lighting = ambient + diffuse + specular;
 
     vec4 texColor = texture(textureIDs, outTexCoord);
+
+    // atmosphere effects
+    vec3 litColor = texColor.rgb * lighting; // change
     
-    vec3 finalColor = mix(texColor.rgb * lighting, fog.fogColor, fogFactor);
+    // vec3 finalColor = mix(texColor.rgb * lighting, fog.fogColor, fogFactor);
+    vec3 finalColor = litColor * outFex + outLin; // change
 
     FragColor = vec4(finalColor, texColor.a);
 }
