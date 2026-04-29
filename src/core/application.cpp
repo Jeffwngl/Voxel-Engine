@@ -3,6 +3,12 @@
 #include <stb_image.h>
 #include <iomanip> // file loading
 
+// imgui
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
+
+
 void loadTextureLayer(const char* path, GLint layer) {
     int w, h, channels;
     unsigned char* data = stbi_load(path, &w, &h, &channels, 0);
@@ -35,6 +41,7 @@ void Game::run() {
     setupLight();
     setupSkyBox();
     configureShaders();
+    configureImgui();
     mainLoop();
 }
 
@@ -173,6 +180,19 @@ void Game::setupLight() {
     glEnableVertexAttribArray(1);
 }
 
+void Game::configureImgui() {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    // io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+
+    // Setup Platform/Renderer backends
+    ImGui_ImplGlfw_InitForOpenGL(window, true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
+    ImGui_ImplOpenGL3_Init();
+}
+
 void Game::setupSkyBox() {
     // skybox image paths
     std::vector<std::string> faces {
@@ -199,6 +219,9 @@ void Game::mainLoop() {
 
 void Game::finish() {
     delete skyBox;
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     glfwDestroyWindow(window);
     glfwTerminate();
 }
@@ -251,6 +274,25 @@ void Game::render() {
     glActiveTexture(GL_TEXTURE0);
     skyBox->draw();
     glDepthFunc(GL_LESS);
+
+    /* Imgui */
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+
+    ImGui::Begin("Debug");
+    ImGui::Text("FPS: %.1f", fps);
+    ImGui::Separator();
+    ImGui::Text("Camera");
+    ImGui::Text("Position: %.1f, %.1f, %.1f", camera.Position.x, camera.Position.y, camera.Position.z);
+    ImGui::Text("Front: %.1f, %.1f, %.1f", camera.Front.x, camera.Front.y, camera.Front.z);
+    ImGui::Separator();
+    ImGui::Text("Sun");
+    ImGui::SliderFloat3("Direction", &sunDir.x, -1.0f, 1.0f);
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     /* Debug */
     // std::cout << "Camera pos: " 

@@ -45,11 +45,11 @@ VoxelEngine/
 | [stb_perlin](https://github.com/nothings/stb) | — | Perlin noise generation |
 
 ## Installation
-Requires CMake 3.16+ and a C++17 compiler (Clang on macOS).
+Requires CMake 3.16+ and a C++17 compiler (gcc on macOS).
 
 ```bash
 git clone https://github.com/Jeffwngl/voxel-engine.git
-cd voxel-engine
+cd Voxel-Engine
 mkdir build && cd build
 cmake ..
 cmake --build .

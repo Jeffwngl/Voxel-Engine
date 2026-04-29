@@ -111,6 +111,7 @@ class Game {
         bool init();
         void loadTextures();
         void configureShaders();
+        void configureImgui();
         void setupLight();
         void setupSkyBox();
         void mainLoop();
