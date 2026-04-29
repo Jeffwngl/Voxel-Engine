@@ -42,8 +42,7 @@ void main()
 
     //diffuse
     vec3 norm = normalize(outNormal);
-    vec3 lightDir = normalize(light.position - outFragPos);
-    // vec3 lightDir = normalize(-light.direction);
+    vec3 lightDir = normalize(light.position);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * light.color * material.diffuse;
 
@@ -65,9 +64,11 @@ void main()
 
     // atmosphere effects
     vec3 litColor = texColor.rgb * lighting; // change
+
+    // atmosphere
+    vec3 atmosColor = litColor * outFex + outLin;
     
-    // vec3 finalColor = mix(texColor.rgb * lighting, fog.fogColor, fogFactor);
-    vec3 finalColor = litColor * outFex + outLin; // change
+    vec3 finalColor = mix(atmosColor, fog.fogColor, fogFactor);
 
     FragColor = vec4(finalColor, texColor.a);
 }

@@ -1,60 +1,7 @@
 #include "application.hpp"
 
-// stb
-// #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-
-// file loading
-#include <iomanip>
-
-/**
- * Standard light block definition
- */
-constexpr float lightCubeVertices[] = {
-    // pos (xyz)            normal (xyz)         uv
-    // Back
-    -0.5f,-0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   0.0f,0.0f,
-     0.5f,-0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   1.0f,0.0f,
-     0.5f, 0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   1.0f,1.0f,
-     0.5f, 0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   1.0f,1.0f,
-    -0.5f, 0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   0.0f,1.0f,
-    -0.5f,-0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   0.0f,0.0f,
-    // Front
-    -0.5f,-0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f,0.0f,
-     0.5f,-0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   1.0f,0.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   1.0f,1.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   1.0f,1.0f,
-    -0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f,1.0f,
-    -0.5f,-0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f,0.0f,
-    // Left
-    -0.5f, 0.5f, 0.5f,  -1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-    -0.5f, 0.5f,-0.5f,  -1.0f, 0.0f, 0.0f,   1.0f,1.0f,
-    -0.5f,-0.5f,-0.5f,  -1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-    -0.5f,-0.5f,-0.5f,  -1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-    -0.5f,-0.5f, 0.5f,  -1.0f, 0.0f, 0.0f,   0.0f,0.0f,
-    -0.5f, 0.5f, 0.5f,  -1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-    // Right
-     0.5f, 0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-     0.5f, 0.5f,-0.5f,   1.0f, 0.0f, 0.0f,   1.0f,1.0f,
-     0.5f,-0.5f,-0.5f,   1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-     0.5f,-0.5f,-0.5f,   1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-     0.5f,-0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f,0.0f,
-     0.5f, 0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-    // Bottom
-    -0.5f,-0.5f,-0.5f,   0.0f,-1.0f, 0.0f,   0.0f,1.0f,
-     0.5f,-0.5f,-0.5f,   0.0f,-1.0f, 0.0f,   1.0f,1.0f,
-     0.5f,-0.5f, 0.5f,   0.0f,-1.0f, 0.0f,   1.0f,0.0f,
-     0.5f,-0.5f, 0.5f,   0.0f,-1.0f, 0.0f,   1.0f,0.0f,
-    -0.5f,-0.5f, 0.5f,   0.0f,-1.0f, 0.0f,   0.0f,0.0f,
-    -0.5f,-0.5f,-0.5f,   0.0f,-1.0f, 0.0f,   0.0f,1.0f,
-    // Top
-    -0.5f, 0.5f,-0.5f,   0.0f, 1.0f, 0.0f,   0.0f,1.0f,
-     0.5f, 0.5f,-0.5f,   0.0f, 1.0f, 0.0f,   1.0f,1.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f,0.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f,0.0f,
-    -0.5f, 0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   0.0f,0.0f,
-    -0.5f, 0.5f,-0.5f,   0.0f, 1.0f, 0.0f,   0.0f,1.0f,
-};
+#include <iomanip> // file loading
 
 void loadTextureLayer(const char* path, GLint layer) {
     int w, h, channels;
@@ -72,9 +19,10 @@ void loadTextureLayer(const char* path, GLint layer) {
 
 namespace Engine {
 
-/* Constructor / destructor */
+// Constructor
 Game::Game() : camera(glm::vec3(0.0f, 32.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)) {}
 
+// Destructor
 Game::~Game() {
     finish();
 }
@@ -85,6 +33,7 @@ void Game::run() {
     if (!init()) return;
     loadTextures();
     setupLight();
+    setupSkyBox();
     configureShaders();
     mainLoop();
 }
@@ -154,14 +103,15 @@ void Game::loadTextures() {
 
 void Game::configureShaders() {
     terrainShader = new Shader("../src/shaders/vertex.glsl", "../src/shaders/fragment.glsl");
-    lightShader = new Shader("../src/shaders/light_vertex.glsl", "../src/shaders/light_fragment.glsl");
+    // lightShader = new Shader("../src/shaders/light_vertex.glsl", "../src/shaders/light_fragment.glsl");
+    skyBoxShader = new Shader("../src/shaders/skybox_vertex.glsl", "../src/shaders/skybox_fragment.glsl");
 
     projection = glm::mat4(1.0f);
     projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f);
 
     terrainShader->useShader();
     terrainShader->setInt("textureIDs", 0);
-    terrainShader->setVec3("light.position", lightPos);
+    terrainShader->setVec3("light.position", sunDir);
     terrainShader->setVec3("light.color", lightColor);
     terrainShader->setFloat("material.ambient", ambientStrength);
     terrainShader->setFloat("material.diffuse", diffuseStrength);
@@ -171,15 +121,24 @@ void Game::configureShaders() {
     terrainShader->setFloat("fog.fogEnd", fogEnd);
     terrainShader->setVec3("fog.fogColor", fogColor);
     // scattering testing
-    // terrainShader->setVec3("betaRayleigh", glm::vec3(1.0e-3f, 2.0e-3f, 4.0e-3f));
-    // terrainShader->setVec3("betaMie", glm::vec3(5e-4f, 5e-4f, 5e-4f));
+    // terrainShader->setVec3("betaRayleigh", glm::vec3(1.0e-3f, 2.0e-3f, 4.0e-3f)); // beta sc Air coefficients (RGB)
+    // terrainShader->setVec3("betaMie", glm::vec3(5e-4f, 5e-4f, 5e-4f)); // beta sc Haze coefficients (RGB)
     // terrainShader->setFloat("g", -0.75f);
     // terrainShader->setFloat("Esun", 15.0f);
-terrainShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
-terrainShader->setVec3("betaMie",      glm::vec3(4e-4f, 4e-4f, 4e-4f));
-terrainShader->setFloat("g",           -0.75f);
-terrainShader->setFloat("Esun",        20.0f);
-terrainShader->setVec3("sunDir",       glm::normalize(glm::vec3(0.5f, 1.0f, 0.3f)));
+
+    terrainShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
+    terrainShader->setVec3("betaMie", glm::vec3(4e-4f, 4e-4f, 4e-4f));
+    terrainShader->setFloat("g", -0.75f);
+    terrainShader->setFloat("Esun", 20.0f);
+
+    skyBoxShader->useShader();
+    skyBoxShader->setMat4("projection", projection);
+    skyBoxShader->setInt("skybox", 0);
+    skyBoxShader->setVec3("sunDir", sunDir); // reuse your existing lightPos
+    skyBoxShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
+    skyBoxShader->setVec3("betaMie", glm::vec3(4e-4f, 4e-4f, 4e-4f));
+    skyBoxShader->setFloat("g", -0.75f);
+    skyBoxShader->setFloat("Esun", 20.0f);
 
     GLint count;
     glGetProgramiv(terrainShader->shaderID, GL_ACTIVE_UNIFORMS, &count);
@@ -195,10 +154,6 @@ terrainShader->setVec3("sunDir",       glm::normalize(glm::vec3(0.5f, 1.0f, 0.3f
         std::cout << "  Uniform " << i << ": " << name << '\n';
     }
 
-    lightShader->useShader();
-    lightShader->setVec3("lightColor", lightColor);
-    lightShader->setMat4("projection", projection);
-    lightShader->setVec3("lightPos", lightPos);
     std::cout << "Shaders loaded." << "\n";
 }
 
@@ -216,8 +171,19 @@ void Game::setupLight() {
 
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
     glEnableVertexAttribArray(1);
+}
 
-    // glBindVertexArray(0);
+void Game::setupSkyBox() {
+    // skybox image paths
+    std::vector<std::string> faces {
+        "../src/assets/skybox/cubemap_new/px.png",  // +X
+        "../src/assets/skybox/cubemap_new/nx.png",  // -X
+        "../src/assets/skybox/cubemap_new/py.png",  // +Y
+        "../src/assets/skybox/cubemap_new/ny.png",  // -Y
+        "../src/assets/skybox/cubemap_new/pz.png",  // +Z
+        "../src/assets/skybox/cubemap_new/nz.png",  // -Z
+    };
+    skyBox = new SkyBox(faces);
 }
 
 void Game::mainLoop() {
@@ -232,6 +198,7 @@ void Game::mainLoop() {
 }
 
 void Game::finish() {
+    delete skyBox;
     glfwDestroyWindow(window);
     glfwTerminate();
 }
@@ -270,16 +237,20 @@ void Game::render() {
     chunkManager.uploadMesh();
     chunkManager.render();
 
-    /* Light cube */
-    lightShader->useShader();
-    lightShader->setMat4("view", view);
-    glm::mat4 lightModel = glm::mat4(1.0f); // can move outside
-    lightModel = glm::translate(lightModel, lightPos);
-    lightShader->setMat4("lightModel", lightModel);
-
     glBindVertexArray(lightVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     // glBindVertexArray(0);
+
+
+    /* Skybox - draw last */
+    glDepthFunc(GL_LEQUAL);
+    skyBoxShader->useShader();
+    skyBoxShader->setMat4("projection", projection);
+    skyBoxShader->setMat4("view", view); // use the same view you computed above
+    skyBoxShader->setInt("skybox", 0);
+    glActiveTexture(GL_TEXTURE0);
+    skyBox->draw();
+    glDepthFunc(GL_LESS);
 
     /* Debug */
     // std::cout << "Camera pos: " 

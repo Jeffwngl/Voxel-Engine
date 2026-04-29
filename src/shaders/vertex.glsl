@@ -20,10 +20,7 @@ out vec3 outNormal;
 out vec3 outFex; // extinction factor
 out vec3 outLin; // in scattering
 
-// // uniform mat4 model; // change
-// uniform mat4 terrainModel;
-// uniform mat4 view;
-// uniform mat4 projection;
+// // uniform mat4 model;
 // // uniform mat4 transform;
 
 const float pi = 3.14159;
@@ -34,6 +31,7 @@ vec3 computeFex(float s) {
     return exp(-betaEx * s);
 }
 
+// Rayleigh scattering
 float rayleighPhase(float cosTheta) {
     return (3.0 / (16.0 * pi)) * (1.0 + cosTheta * cosTheta);
 }
