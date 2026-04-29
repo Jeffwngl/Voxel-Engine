@@ -1,9 +1,12 @@
 *.js linguist-vendored
 *.css linguist-vendored
-*.c linguist-vendored
 *.scss linguist-vendored
+*.html linguist-vendored
 
-*.c linguist-generated
 *.js linguist-generated
 *.css linguist-generated
 *.scss linguist-generated 
+*.html linguist-generated
+
+src/external/* linguist-vendored
+include/* linguist-vendored
