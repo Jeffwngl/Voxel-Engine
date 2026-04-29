@@ -21,7 +21,7 @@ void Camera::updateCameraVectors() {
     front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
     Front = glm::normalize(front);
     Right = glm::normalize(glm::cross(Front, WorldUp));
-    Up    = glm::normalize(glm::cross(Right, Front));
+    Up = glm::normalize(glm::cross(Right, Front));
 }
 
 void Camera::processInput(GLFWwindow* window, float deltaTime) {
@@ -33,7 +33,7 @@ void Camera::processInput(GLFWwindow* window, float deltaTime) {
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) Position -= speed * Front;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) Position += speed * glm::normalize(glm::cross(Front, Up));
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) Position -= speed * glm::normalize(glm::cross(Front, Up));
-    if (glfwGetKey(window, GLFW_KEY_SPACE)      == GLFW_PRESS) Position += speed * Up;
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) Position += speed * Up;
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) Position -= speed * Up;
 }
 
@@ -49,9 +49,9 @@ void Camera::mouseCallBack(GLFWwindow* window, double xPos, double yPos) {
     lastMouseX = xPos;
     lastMouseY = yPos;
 
-    Yaw   += xOffset;
+    Yaw += xOffset;
     Pitch -= yOffset;
-    Pitch  = glm::clamp(Pitch, -89.0f, 89.0f);
+    Pitch = glm::clamp(Pitch, -89.0f, 89.0f);
 
     updateCameraVectors();
 }

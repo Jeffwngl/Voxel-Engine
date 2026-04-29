@@ -29,55 +29,6 @@
 
 #include "../render/skybox.hpp" // TODO: maybe move this later
 
-/**
- * Standard light block definition
- */
-constexpr float lightCubeVertices[] = { // TODO: move somewhere else
-    // pos (xyz)            normal (xyz)         uv
-    // Back
-    -0.5f,-0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   0.0f,0.0f,
-     0.5f,-0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   1.0f,0.0f,
-     0.5f, 0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   1.0f,1.0f,
-     0.5f, 0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   1.0f,1.0f,
-    -0.5f, 0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   0.0f,1.0f,
-    -0.5f,-0.5f,-0.5f,   0.0f, 0.0f,-1.0f,   0.0f,0.0f,
-    // Front
-    -0.5f,-0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f,0.0f,
-     0.5f,-0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   1.0f,0.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   1.0f,1.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   1.0f,1.0f,
-    -0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f,1.0f,
-    -0.5f,-0.5f, 0.5f,   0.0f, 0.0f, 1.0f,   0.0f,0.0f,
-    // Left
-    -0.5f, 0.5f, 0.5f,  -1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-    -0.5f, 0.5f,-0.5f,  -1.0f, 0.0f, 0.0f,   1.0f,1.0f,
-    -0.5f,-0.5f,-0.5f,  -1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-    -0.5f,-0.5f,-0.5f,  -1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-    -0.5f,-0.5f, 0.5f,  -1.0f, 0.0f, 0.0f,   0.0f,0.0f,
-    -0.5f, 0.5f, 0.5f,  -1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-    // Right
-     0.5f, 0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-     0.5f, 0.5f,-0.5f,   1.0f, 0.0f, 0.0f,   1.0f,1.0f,
-     0.5f,-0.5f,-0.5f,   1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-     0.5f,-0.5f,-0.5f,   1.0f, 0.0f, 0.0f,   0.0f,1.0f,
-     0.5f,-0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   0.0f,0.0f,
-     0.5f, 0.5f, 0.5f,   1.0f, 0.0f, 0.0f,   1.0f,0.0f,
-    // Bottom
-    -0.5f,-0.5f,-0.5f,   0.0f,-1.0f, 0.0f,   0.0f,1.0f,
-     0.5f,-0.5f,-0.5f,   0.0f,-1.0f, 0.0f,   1.0f,1.0f,
-     0.5f,-0.5f, 0.5f,   0.0f,-1.0f, 0.0f,   1.0f,0.0f,
-     0.5f,-0.5f, 0.5f,   0.0f,-1.0f, 0.0f,   1.0f,0.0f,
-    -0.5f,-0.5f, 0.5f,   0.0f,-1.0f, 0.0f,   0.0f,0.0f,
-    -0.5f,-0.5f,-0.5f,   0.0f,-1.0f, 0.0f,   0.0f,1.0f,
-    // Top
-    -0.5f, 0.5f,-0.5f,   0.0f, 1.0f, 0.0f,   0.0f,1.0f,
-     0.5f, 0.5f,-0.5f,   0.0f, 1.0f, 0.0f,   1.0f,1.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f,0.0f,
-     0.5f, 0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   1.0f,0.0f,
-    -0.5f, 0.5f, 0.5f,   0.0f, 1.0f, 0.0f,   0.0f,0.0f,
-    -0.5f, 0.5f,-0.5f,   0.0f, 1.0f, 0.0f,   0.0f,1.0f,
-};
-
 namespace Engine {
 
 inline constexpr unsigned int SCREEN_WIDTH = 800;
@@ -94,6 +45,10 @@ class Game {
         float lastFrame = 0.0f;
         float fps = 0.0f;
         float frameCount = 0.0f;
+
+        /* Cursor enabling */
+        bool tabPressed = false;
+        bool cursorEnabled = false;
 
         Camera camera;
 
@@ -112,7 +67,6 @@ class Game {
         void loadTextures();
         void configureShaders();
         void configureImgui();
-        void setupLight();
         void setupSkyBox();
         void mainLoop();
         void finish();
@@ -132,16 +86,11 @@ class Game {
 
         unsigned int textureArray = 0;
 
-        /* Light geometry */
-        unsigned int lightVAO = 0;
-        unsigned int lightVBO = 0;
-
         /* Light parameters */
         float ambientStrength = 0.5f;
         float diffuseStrength = 1.0f;
         float specularStrength = 0.6f;
         float shininess = 32.0f;
-        // glm::vec3 lightPos { 64.0f, 64.0f, 64.0f };
         glm::vec3 sunDir { glm::normalize(glm::vec3(0.5f, 1.0f, 0.3f)) };
         glm::vec3 lightColor { 1.0f, 1.0f, 1.0f };
 

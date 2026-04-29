@@ -38,7 +38,6 @@ Game::~Game() {
 void Game::run() {
     if (!init()) return;
     loadTextures();
-    setupLight();
     setupSkyBox();
     configureShaders();
     configureImgui();
@@ -72,7 +71,6 @@ bool Game::init() {
     glfwMakeContextCurrent(window);  // Make context current
     glfwSetFramebufferSizeCallback(window, onFrameBufferResize);
     glfwSetCursorPosCallback(window, onMouseMove);
-    // if (glfwRawMouseMotionSupported()) glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN); // Wslg doesnt support GLFW_CURSOR_DISABLED
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 
@@ -127,16 +125,18 @@ void Game::configureShaders() {
     terrainShader->setFloat("fog.fogStart", fogStart);
     terrainShader->setFloat("fog.fogEnd", fogEnd);
     terrainShader->setVec3("fog.fogColor", fogColor);
-    // scattering testing
-    // terrainShader->setVec3("betaRayleigh", glm::vec3(1.0e-3f, 2.0e-3f, 4.0e-3f)); // beta sc Air coefficients (RGB)
-    // terrainShader->setVec3("betaMie", glm::vec3(5e-4f, 5e-4f, 5e-4f)); // beta sc Haze coefficients (RGB)
-    // terrainShader->setFloat("g", -0.75f);
-    // terrainShader->setFloat("Esun", 15.0f);
 
-    terrainShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
-    terrainShader->setVec3("betaMie", glm::vec3(4e-4f, 4e-4f, 4e-4f));
+    // scattering testing
+    terrainShader->setVec3("betaRayleigh", glm::vec3(1.0e-3f, 2.0e-3f, 4.0e-3f)); // beta sc Air coefficients (RGB)
+    terrainShader->setVec3("betaMie", glm::vec3(5e-4f, 5e-4f, 5e-4f)); // beta sc Haze coefficients (RGB)
     terrainShader->setFloat("g", -0.75f);
-    terrainShader->setFloat("Esun", 20.0f);
+    terrainShader->setFloat("Esun", 15.0f);
+
+    // intense scattering
+    // terrainShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
+    // terrainShader->setVec3("betaMie", glm::vec3(4e-4f, 4e-4f, 4e-4f));
+    // terrainShader->setFloat("g", -0.75f);
+    // terrainShader->setFloat("Esun", 20.0f);
 
     skyBoxShader->useShader();
     skyBoxShader->setMat4("projection", projection);
@@ -163,22 +163,7 @@ void Game::configureShaders() {
 
     std::cout << "Shaders loaded." << "\n";
 }
-
-void Game::setupLight() {
-    glGenVertexArrays(1, &lightVAO);
-    glGenBuffers(1, &lightVBO);
-
-    glBindVertexArray(lightVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, lightVBO);
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(lightCubeVertices), lightCubeVertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
-    glEnableVertexAttribArray(1);
-}
+   
 
 void Game::configureImgui() {
     IMGUI_CHECKVERSION();
@@ -231,7 +216,28 @@ void Game::update() {
     deltaTime = currentFrame - lastTime;
     lastTime = currentFrame;
 
-    camera.processInput(window, deltaTime);
+    // toggle mouse cursor on and off
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS && !tabPressed) {
+        tabPressed = true;
+        cursorEnabled = !cursorEnabled;
+        if (cursorEnabled) {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        }
+        else {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            firstLoad = true; // prevent camera snap when re-entering
+        }
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_RELEASE) {
+        tabPressed = false;
+    }
+
+    if (!cursorEnabled) {
+        camera.processInput(window, deltaTime);
+    }
+
+    // camera.processInput(window, deltaTime);
 }
 
 void Game::render() {
@@ -251,6 +257,7 @@ void Game::render() {
     glm::mat4 terrainModel = glm::mat4(1.0f);
     terrainShader->setMat4("terrainModel", terrainModel);
     terrainShader->setMat4("projection", projection); // vertices into screen space
+    terrainShader->setVec3("light.position", sunDir);
 
     /* Chunk generation */
     int playerChunk_x = static_cast<int>(std::floor(camera.Position.x / CHUNK_SIZE));
@@ -260,17 +267,13 @@ void Game::render() {
     chunkManager.uploadMesh();
     chunkManager.render();
 
-    glBindVertexArray(lightVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    // glBindVertexArray(0);
-
-
     /* Skybox - draw last */
     glDepthFunc(GL_LEQUAL);
     skyBoxShader->useShader();
     skyBoxShader->setMat4("projection", projection);
     skyBoxShader->setMat4("view", view); // use the same view you computed above
     skyBoxShader->setInt("skybox", 0);
+    skyBoxShader->setVec3("sunDir", sunDir);
     glActiveTexture(GL_TEXTURE0);
     skyBox->draw();
     glDepthFunc(GL_LESS);
@@ -326,6 +329,7 @@ void Game::calculateFPS() {
 // TODO: Rewrite this
 void Game::onMouseMove(GLFWwindow* window, double xPos, double yPos) {
     auto* app = static_cast<Game*>(glfwGetWindowUserPointer(window));
+    if (app->cursorEnabled) return;
     app->camera.mouseCallBack(window, xPos, yPos);
 }
 

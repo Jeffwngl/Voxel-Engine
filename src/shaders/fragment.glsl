@@ -10,7 +10,7 @@ struct Material {
 
 struct Light {
     vec3 color;
-    vec3 position;
+    vec3 position; // treated as directional light
 };
 
 struct Fog {
@@ -22,10 +22,8 @@ struct Fog {
 in vec3 outTexCoord;
 in vec3 outNormal;
 in vec3 outFragPos;
-in vec3 outFex; // change
-in vec3 outLin; // change
-
-// uniform vec3 lightPos; // may need for sun later
+in vec3 outFex;
+in vec3 outLin;
 
 uniform sampler2DArray textureIDs;
 
