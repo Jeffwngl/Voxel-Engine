@@ -8,15 +8,23 @@
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
-
 void loadTextureLayer(const char* path, GLint layer) {
     int w, h, channels;
     unsigned char* data = stbi_load(path, &w, &h, &channels, 0);
     if (data) {
-        glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0,
-                        0, 0, layer,
-                        Engine::TEXTURE_SIZE, Engine::TEXTURE_SIZE, 1,
-                        GL_RGBA, GL_UNSIGNED_BYTE, data);
+        glTexSubImage3D(
+            GL_TEXTURE_2D_ARRAY, 
+            0,
+            0, 
+            0, 
+            layer,
+            Engine::TEXTURE_SIZE, 
+            Engine::TEXTURE_SIZE, 
+            1,
+            GL_RGBA, 
+            GL_UNSIGNED_BYTE, 
+            data
+        );
         stbi_image_free(data);
     } else {
         std::cerr << "[Texture] Failed to load: " << path << '\n';
@@ -39,6 +47,7 @@ void Game::run() {
     if (!init()) return;
     loadTextures();
     setupSkyBox();
+    setupDepthMap();
     configureShaders();
     configureImgui();
     mainLoop();
@@ -106,16 +115,17 @@ void Game::loadTextures() {
     glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
 }
 
-void Game::configureShaders() {
+void Game::configureShaders() { // TODO: Move this to another file
     terrainShader = new Shader("../src/shaders/vertex.glsl", "../src/shaders/fragment.glsl");
-    // lightShader = new Shader("../src/shaders/light_vertex.glsl", "../src/shaders/light_fragment.glsl");
     skyBoxShader = new Shader("../src/shaders/skybox_vertex.glsl", "../src/shaders/skybox_fragment.glsl");
+    depthShader = new Shader("../src/shaders/depth_vertex.glsl", "../src/shaders/depth_fragment.glsl");
 
     projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, FAR_PLANE);
 
     terrainShader->useShader();
     terrainShader->setInt("textureIDs", 0);
+    terrainShader->setInt("shadowMap", 1);
     terrainShader->setVec3("light.position", sunDir);
     terrainShader->setVec3("light.color", lightColor);
     terrainShader->setFloat("material.ambient", ambientStrength);
@@ -140,8 +150,7 @@ void Game::configureShaders() {
 
     skyBoxShader->useShader();
     skyBoxShader->setMat4("projection", projection);
-    skyBoxShader->setInt("skybox", 0);
-    skyBoxShader->setVec3("sunDir", sunDir); // reuse your existing lightPos
+    skyBoxShader->setVec3("sunDir", sunDir);
     skyBoxShader->setVec3("betaRayleigh", glm::vec3(1.16e-3f, 2.7e-3f, 6.62e-3f));
     skyBoxShader->setVec3("betaMie", glm::vec3(4e-4f, 4e-4f, 4e-4f));
     skyBoxShader->setFloat("g", -0.75f);
@@ -171,7 +180,7 @@ void Game::configureImgui() {
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    // io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // IF using Docking Branch
+    // io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;      // IF using Docking Branch
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);          // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
@@ -180,15 +189,19 @@ void Game::configureImgui() {
 
 void Game::setupSkyBox() {
     // skybox image paths
-    std::vector<std::string> faces {
-        "../src/assets/skybox/cubemap_new/px.png",  // +X
-        "../src/assets/skybox/cubemap_new/nx.png",  // -X
-        "../src/assets/skybox/cubemap_new/py.png",  // +Y
-        "../src/assets/skybox/cubemap_new/ny.png",  // -Y
-        "../src/assets/skybox/cubemap_new/pz.png",  // +Z
-        "../src/assets/skybox/cubemap_new/nz.png",  // -Z
-    };
-    skyBox = new SkyBox(faces);
+    // std::vector<std::string> faces { TODO: remove and clean
+    //     "../src/assets/skybox/cubemap_new/px.png",  // +X
+    //     "../src/assets/skybox/cubemap_new/nx.png",  // -X
+    //     "../src/assets/skybox/cubemap_new/py.png",  // +Y
+    //     "../src/assets/skybox/cubemap_new/ny.png",  // -Y
+    //     "../src/assets/skybox/cubemap_new/pz.png",  // +Z
+    //     "../src/assets/skybox/cubemap_new/nz.png",  // -Z
+    // };
+    skyBox = new SkyBox();
+}
+
+void Game::setupDepthMap() {
+    depthMap = new DepthMap();
 }
 
 void Game::mainLoop() {
@@ -211,7 +224,7 @@ void Game::finish() {
     glfwTerminate();
 }
 
-void Game::update() {
+void Game::update() { // TODO: Move to separate files
     float currentFrame = static_cast<float>(glfwGetTime());
     deltaTime = currentFrame - lastTime;
     lastTime = currentFrame;
@@ -236,13 +249,29 @@ void Game::update() {
     if (!cursorEnabled) {
         camera.processInput(window, deltaTime);
     }
-
-    // camera.processInput(window, deltaTime);
 }
 
 void Game::render() {
-    // Set background color and clear
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    /* Chunk Generation */
+    int playerChunk_x = static_cast<int>(std::floor(camera.Position.x / CHUNK_SIZE));
+    int playerChunk_z = static_cast<int>(std::floor(camera.Position.z / CHUNK_SIZE));
+    chunkManager.update(playerChunk_x, playerChunk_z, RENDER_DISTANCE);
+    chunkManager.uploadMesh(); // put this at top so depth map can use it
+
+    /* Render scene to depth map */
+    // pass 1
+    glm::mat4 lightSpaceMatrix = depthMap->getLightSpaceMatrix(sunDir, camera.Position);
+    depthMap->bindForWriting();
+    depthShader->useShader();
+    depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
+    depthShader->setMat4("terrainModel", glm::mat4(1.0f));
+    chunkManager.render();
+    glBindFramebuffer(GL_FRAMEBUFFER, 0); // return to default framebuffer
+    // pass 2
+    int fbWidth, fbHeight; // macOS retina displays framebuffer is double windows
+    glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+    glViewport(0, 0, fbWidth, fbHeight);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // background
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glm::mat4 view = glm::lookAt(camera.Position, camera.Position + camera.Front, camera.Up);
@@ -250,7 +279,7 @@ void Game::render() {
     /* Terrain */
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D_ARRAY, textureArray);
-
+    depthMap->bindForReading(1);
     terrainShader->useShader();
     terrainShader->setMat4("view", view); // vertices into world space
     terrainShader->setVec3("cameraPos", camera.Position);
@@ -258,13 +287,9 @@ void Game::render() {
     terrainShader->setMat4("terrainModel", terrainModel);
     terrainShader->setMat4("projection", projection); // vertices into screen space
     terrainShader->setVec3("light.position", sunDir);
+    terrainShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
 
-    /* Chunk generation */
-    int playerChunk_x = static_cast<int>(std::floor(camera.Position.x / CHUNK_SIZE));
-    int playerChunk_z = static_cast<int>(std::floor(camera.Position.z / CHUNK_SIZE));
-    // std::cout << "Player chunk: " << playerChunk_x << ", " << playerChunk_z << '\n';
-    chunkManager.update(playerChunk_x, playerChunk_z, RENDER_DISTANCE);
-    chunkManager.uploadMesh();
+    // render chunk here
     chunkManager.render();
 
     /* Skybox - draw last */
@@ -272,9 +297,7 @@ void Game::render() {
     skyBoxShader->useShader();
     skyBoxShader->setMat4("projection", projection);
     skyBoxShader->setMat4("view", view); // use the same view you computed above
-    skyBoxShader->setInt("skybox", 0);
     skyBoxShader->setVec3("sunDir", sunDir);
-    glActiveTexture(GL_TEXTURE0);
     skyBox->draw();
     glDepthFunc(GL_LESS);
 
@@ -332,5 +355,4 @@ void Game::onMouseMove(GLFWwindow* window, double xPos, double yPos) {
     if (app->cursorEnabled) return;
     app->camera.mouseCallBack(window, xPos, yPos);
 }
-
 }

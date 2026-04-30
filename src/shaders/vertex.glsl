@@ -7,6 +7,7 @@ layout (location = 3) in float aTexID;
 uniform mat4 terrainModel;
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat4 lightSpaceMatrix;
 uniform vec3 cameraPos;
 uniform vec3 sunDir; // normalized direction to sun
 uniform vec3 betaRayleigh; // (6.95e-6, 1.18e-5, 2.44e-5)
@@ -19,9 +20,7 @@ out vec3 outFragPos;
 out vec3 outNormal;
 out vec3 outFex; // extinction factor
 out vec3 outLin; // in scattering
-
-// // uniform mat4 model;
-// // uniform mat4 transform;
+out vec4 outFragPosLightSpace;
 
 const float pi = 3.14159;
 
@@ -49,6 +48,8 @@ void main()
     outNormal = mat3(transpose(inverse(terrainModel))) * aNormal;
     outTexCoord = vec3(aTexCoord.x, aTexCoord.y, aTexID);
     gl_Position = projection * view * worldPos;
+
+    outFragPosLightSpace = lightSpaceMatrix * vec4(outFragPos, 1.0);
 
     // Atmospheric scattering
     float s = length(outFragPos - cameraPos);

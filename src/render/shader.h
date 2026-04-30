@@ -42,6 +42,10 @@ class Shader {
             glDeleteShader(fragmentShader);
         };
 
+        ~Shader() {
+            glDeleteProgram(shaderID);
+        }
+
         void useShader() {
             glUseProgram(shaderID);
         };

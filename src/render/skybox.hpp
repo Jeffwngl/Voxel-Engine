@@ -29,14 +29,14 @@ static const float skyboxVertices[] = {
 
 class SkyBox {
     private:
-        unsigned int cubeMapTexture;
+        // unsigned int cubeMapTexture;
         unsigned int VAO, VBO;
 
         unsigned int loadCubeMap(const std::vector<std::string>& faces);
         void setupMesh();
 
     public:
-        SkyBox(const std::vector<std::string>& faces); // constructor
+        SkyBox(); // constructor
         ~SkyBox(); // destructor
         void draw() const;
 };

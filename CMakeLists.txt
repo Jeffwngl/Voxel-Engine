@@ -29,6 +29,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     src/external/imgui/imgui_tables.cpp
     src/external/imgui/imgui_widgets.cpp
     src/external/imgui/imgui.cpp
+    src/render/depth_map.cpp
 )
 
 target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC 

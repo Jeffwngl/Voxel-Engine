@@ -3,16 +3,14 @@
 #include <stb_image.h>
 
 // constructor
-SkyBox::SkyBox(const std::vector<std::string>& faces) {
+SkyBox::SkyBox() {
     setupMesh();
-    cubeMapTexture = loadCubeMap(faces);
 }
 
 // destructor
 SkyBox::~SkyBox() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteTextures(1, &cubeMapTexture);
 }
 
 void SkyBox::setupMesh() {
@@ -26,7 +24,7 @@ void SkyBox::setupMesh() {
     glBindVertexArray(0);
 }
 
-unsigned int SkyBox::loadCubeMap(const std::vector<std::string>& faces) {
+unsigned int SkyBox::loadCubeMap(const std::vector<std::string>& faces) { // TODO: remove
     unsigned int textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
@@ -53,20 +51,20 @@ unsigned int SkyBox::loadCubeMap(const std::vector<std::string>& faces) {
             std::cout << "Failed to load CubeMap from Path " << faces[i] << '\n';
             stbi_image_free(data);
         }
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
     }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    
     return textureID;
 }
 
 void SkyBox::draw() const {
     glDepthFunc(GL_LEQUAL); // ensures skybox is always behind at z = 1.0
     glBindVertexArray(VAO);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTexture);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
     glDepthFunc(GL_LESS);

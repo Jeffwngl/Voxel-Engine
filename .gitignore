@@ -3,5 +3,5 @@ out/
 .vscode/
 .DS_Store
 glad.o
-.cache
+.cache/
 .gitignore

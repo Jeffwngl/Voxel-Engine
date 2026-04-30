@@ -1,0 +1,6 @@
+- Make it compile on windows.
+- Get rid of extra faces on edge of chunks.
+- Switch light source to sun in sky.
+- Implement volumetric fog and skybox/atmosphere.
+- Ambient occlusion
+- Greedy meshing

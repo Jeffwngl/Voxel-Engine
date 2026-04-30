@@ -27,7 +27,11 @@
 // camera helpers
 #include "../input/camera.hpp"
 
+// sky box
 #include "../render/skybox.hpp" // TODO: maybe move this later
+
+// shadow mapping
+#include "../render/depth_map.hpp"
 
 namespace Engine {
 
@@ -35,7 +39,8 @@ inline constexpr unsigned int SCREEN_WIDTH = 800;
 inline constexpr unsigned int SCREEN_HEIGHT = 600;
 inline constexpr int TEXTURE_SIZE = 128;
 inline constexpr int CHUNK_SIZE = 16;
-inline constexpr int RENDER_DISTANCE = 5;
+inline constexpr int RENDER_DISTANCE = 8;
+inline constexpr float FAR_PLANE = 200.0f; // TODO: make far plane based of render distance
 
 class Game {
     private:
@@ -68,6 +73,7 @@ class Game {
         void configureShaders();
         void configureImgui();
         void setupSkyBox();
+        void setupDepthMap();
         void mainLoop();
         void finish();
 
@@ -81,10 +87,13 @@ class Game {
         Shader* terrainShader;
         Shader* lightShader;
         Shader* skyBoxShader;
+        Shader* depthShader;
 
         SkyBox* skyBox;
 
         unsigned int textureArray = 0;
+
+        DepthMap* depthMap;
 
         /* Light parameters */
         float ambientStrength = 0.5f;
@@ -98,7 +107,7 @@ class Game {
 
         /* Fog parameters */
         float fogStart = 70.0f;
-        float fogEnd = 100.0f;
+        float fogEnd = 120.0f;
         glm::vec3 fogColor { 1.0f, 1.0f, 1.0f };
 
     public:

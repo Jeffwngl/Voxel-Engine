@@ -24,14 +24,27 @@ in vec3 outNormal;
 in vec3 outFragPos;
 in vec3 outFex;
 in vec3 outLin;
+in vec4 outFragPosLightSpace;
 
 uniform sampler2DArray textureIDs;
+uniform sampler2D shadowMap;
 
 // uniform vec3 lightColor;
 uniform vec3 cameraPos;
 uniform Material material;
 uniform Light light;
 uniform Fog fog;
+
+float calculateShadow(vec4 fragPosLightSpace) {
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    projCoords = projCoords * 0.5 + 0.5;
+    float closestDepth = texture(shadowMap, projCoords.xy).r;
+    float currentDepth = projCoords.z;
+    float bias = 0.005;
+    float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+    if (projCoords.z > 1.0) shadow = 0.0;
+    return shadow;
+}
 
 void main()
 {
@@ -55,13 +68,17 @@ void main()
     float dist = length(outFragPos - cameraPos);
     float fogFactor = clamp((dist - fog.fogStart) / (fog.fogEnd - fog.fogStart), 0.0, 1.0);
 
+    // shadow
+    float shadow = calculateShadow(outFragPosLightSpace);
+
     // combine
-    vec3 lighting = ambient + diffuse + specular;
+    vec3 lighting = ambient + (1.0 - shadow) * (diffuse + specular);
+    // vec3 lighting = ambient + diffuse + specular;
 
     vec4 texColor = texture(textureIDs, outTexCoord);
 
     // atmosphere effects
-    vec3 litColor = texColor.rgb * lighting; // change
+    vec3 litColor = texColor.rgb * lighting;
 
     // atmosphere
     vec3 atmosColor = litColor * outFex + outLin;
@@ -69,6 +86,7 @@ void main()
     vec3 finalColor = mix(atmosColor, fog.fogColor, fogFactor);
 
     FragColor = vec4(finalColor, texColor.a);
+    // FragColor = vec4(vec3(1.0 - shadow), 1.0); // white = lit, black = shadow
 }
 
 /* ---------------------- Debugging ---------------------- */

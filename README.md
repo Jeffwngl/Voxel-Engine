@@ -74,7 +74,17 @@ ninja
 
 For those who wish to still run this via WSL, you can install the dependencies using `ubuntu-deps.sh`.
 
+## Controls
+
+- `WASD` Move around.
+- `Q` Toggle on and off cursor control.
+- `SPACE` Move up.
+- `Shift` Move down.
+
 ## Screenshots
+
+
+### Development
 
 ![perlin](/public/Perlin.png?raw=true)
 ![lighting 1](public/diffuse.png?raw=true)
