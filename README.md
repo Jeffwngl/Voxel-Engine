@@ -83,8 +83,8 @@ For those who wish to still run this via WSL, you can install the dependencies u
 
 ## Screenshots
 
-![picture1](/public/picture1.png)
-![picture1](/public/picture1.png)
+![picture](/public/picture1.png)
+![picture](/public/picture2.png)
 
 ### Development
 
