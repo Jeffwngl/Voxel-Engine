@@ -188,15 +188,6 @@ void Game::configureImgui() {
 }
 
 void Game::setupSkyBox() {
-    // skybox image paths
-    // std::vector<std::string> faces { TODO: remove and clean
-    //     "../src/assets/skybox/cubemap_new/px.png",  // +X
-    //     "../src/assets/skybox/cubemap_new/nx.png",  // -X
-    //     "../src/assets/skybox/cubemap_new/py.png",  // +Y
-    //     "../src/assets/skybox/cubemap_new/ny.png",  // -Y
-    //     "../src/assets/skybox/cubemap_new/pz.png",  // +Z
-    //     "../src/assets/skybox/cubemap_new/nz.png",  // -Z
-    // };
     skyBox = new SkyBox();
 }
 
@@ -265,10 +256,12 @@ void Game::render() {
     depthShader->useShader();
     depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
     depthShader->setMat4("terrainModel", glm::mat4(1.0f));
+    glCullFace(GL_FRONT); // render back faces to depth map
     chunkManager.render();
+    glCullFace(GL_BACK); // restore for normal rendering
     glBindFramebuffer(GL_FRAMEBUFFER, 0); // return to default framebuffer
     // pass 2
-    int fbWidth, fbHeight; // macOS retina displays framebuffer is double windows
+    int fbWidth, fbHeight; // macOS retina displays framebuffer is double windows, safer to get framebuffer size for both
     glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
     glViewport(0, 0, fbWidth, fbHeight);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // background
@@ -289,7 +282,7 @@ void Game::render() {
     terrainShader->setVec3("light.position", sunDir);
     terrainShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
 
-    // render chunk here
+    // render chunk
     chunkManager.render();
 
     /* Skybox - draw last */
@@ -319,16 +312,6 @@ void Game::render() {
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-    /* Debug */
-    // std::cout << "Camera pos: " 
-    //           << camera.Position.x << ", " 
-    //           << camera.Position.y << ", " 
-    //           << camera.Position.z << '\n';
-    // std::cout << "Camera front: "
-    //           << camera.Front.x << ","
-    //           << camera.Front.y << ","
-    //           << camera.Front.z << '\n';
 }
 
 void Game::onFrameBufferResize(GLFWwindow* window, int width, int height) {
