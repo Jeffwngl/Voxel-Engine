@@ -55,6 +55,10 @@ class Game {
         bool tabPressed = false;
         bool cursorEnabled = false;
 
+        /* Wireframe */
+        bool mPressed = false;
+        bool wireframe = false;
+
         Camera camera;
 
         float yaw;
@@ -100,7 +104,7 @@ class Game {
         float diffuseStrength = 1.0f;
         float specularStrength = 0.6f;
         float shininess = 32.0f;
-        glm::vec3 sunDir { glm::normalize(glm::vec3(0.5f, 1.0f, 0.3f)) };
+        glm::vec3 sunDir { glm::normalize(glm::vec3(0.5f, -1.0f, 0.3f)) };
         glm::vec3 lightColor { 1.0f, 1.0f, 1.0f };
 
         glm::mat4 projection { 1.0f };

@@ -80,6 +80,14 @@ For those who wish to still run this via WSL, you can install the dependencies u
 - `Q` Toggle on and off cursor control.
 - `SPACE` Move up.
 - `Shift` Move down.
+- `M` Toggle mesh view.
+
+## Future Updates
+
+- Better world generation models.
+- Clouds.
+- Atmospheric Fog.
+- Octree implementation.
 
 ## Screenshots
 

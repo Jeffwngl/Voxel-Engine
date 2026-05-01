@@ -220,6 +220,16 @@ void Game::update() { // TODO: Move to separate files
     deltaTime = currentFrame - lastTime;
     lastTime = currentFrame;
 
+    // toggle polygon mode on and off
+    if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS && !mPressed) {
+        mPressed = true;
+        wireframe = !wireframe;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_M) == GLFW_RELEASE) {
+        mPressed = false;
+    }
+
     // toggle mouse cursor on and off
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS && !tabPressed) {
         tabPressed = true;
@@ -282,8 +292,16 @@ void Game::render() {
     terrainShader->setVec3("light.position", sunDir);
     terrainShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
 
+    if (wireframe) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+
     // render chunk
     chunkManager.render();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     /* Skybox - draw last */
     glDepthFunc(GL_LEQUAL);
