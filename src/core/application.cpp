@@ -120,8 +120,14 @@ void Game::configureShaders() { // TODO: Move this to another file
     skyBoxShader = new Shader("../src/shaders/skybox_vertex.glsl", "../src/shaders/skybox_fragment.glsl");
     depthShader = new Shader("../src/shaders/depth_vertex.glsl", "../src/shaders/depth_fragment.glsl");
 
+    float farPlane = (renderDistance + 1) * CHUNK_SIZE * 2.0f;
     projection = glm::mat4(1.0f);
-    projection = glm::perspective(glm::radians(45.0f), static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 0.1f, FAR_PLANE);
+    projection = glm::perspective(
+        glm::radians(45.0f), 
+        static_cast<float>(SCREEN_WIDTH) / static_cast<float>(SCREEN_HEIGHT), 
+        0.1f, 
+        farPlane
+    );
 
     terrainShader->useShader();
     terrainShader->setInt("textureIDs", 0);
@@ -256,7 +262,7 @@ void Game::render() {
     /* Chunk Generation */
     int playerChunk_x = static_cast<int>(std::floor(camera.Position.x / CHUNK_SIZE));
     int playerChunk_z = static_cast<int>(std::floor(camera.Position.z / CHUNK_SIZE));
-    chunkManager.update(playerChunk_x, playerChunk_z, RENDER_DISTANCE);
+    chunkManager.update(playerChunk_x, playerChunk_z, renderDistance);
     chunkManager.uploadMesh(); // put this at top so depth map can use it
 
     /* Render scene to depth map */
@@ -326,8 +332,20 @@ void Game::render() {
     ImGui::Separator();
     ImGui::Text("Sun");
     ImGui::SliderFloat3("Direction", &sunDir.x, -1.0f, 1.0f);
+    ImGui::Separator();
+    ImGui::Text("World");
+    int prevRenderDistance = renderDistance;
+    ImGui::SliderInt("Render Distance", &renderDistance, 1, 16);
+    if (renderDistance != prevRenderDistance) {
+        chunkManager.clear();
+        int fbWidth, fbHeight;
+        glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+        float farPlane = (renderDistance + 1) * CHUNK_SIZE * 2.0f;
+        projection = glm::perspective(glm::radians(45.0f),
+            static_cast<float>(fbWidth) / static_cast<float>(fbHeight),
+            0.1f, farPlane);
+    }
     ImGui::End();
-
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

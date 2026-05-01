@@ -32,4 +32,5 @@ class ChunkManager {
         void update(const int playerChunk_x, const int playerChunk_z, const int render_distance);
         void uploadMesh();
         void render();
+        void clear();
 };

@@ -70,7 +70,6 @@ void ChunkManager::update(const int playerChunk_x, const int playerChunk_z, cons
 
                 chunk.vertices = PerlinGen::generate(0.05f, x_shifted, z_shifted);
                 chunk.ready = false;
-                // Avoid using temporaries
                 world.emplace(key, std::move(chunk));
             }
         }
@@ -106,7 +105,7 @@ void ChunkManager::uploadMesh() {
             glGenBuffers(1, &chunk.VBO);
 
             /* Debug */
-            drawn++;
+            ++drawn;
 
             glBindVertexArray(chunk.VAO);
             glBindBuffer(GL_ARRAY_BUFFER, chunk.VBO);
@@ -148,4 +147,14 @@ void ChunkManager::render() {
         glBindVertexArray(chunk.VAO);
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(chunk.vertices.size()));
     }
+}
+
+void ChunkManager::clear() {
+    for (auto& [key, chunk] : world) {
+        if (chunk.ready) {
+            glDeleteVertexArrays(1, &chunk.VAO);
+            glDeleteBuffers(1, &chunk.VBO);
+        }
+    }
+    world.clear();
 }

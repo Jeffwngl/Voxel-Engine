@@ -114,6 +114,9 @@ class Game {
         float fogEnd = 120.0f;
         glm::vec3 fogColor { 1.0f, 1.0f, 1.0f };
 
+        /* render / chunks */
+        int renderDistance = RENDER_DISTANCE;
+
     public:
         GLFWwindow* window;
 
