@@ -49,6 +49,39 @@ static long long getChunkKey(int x, int z) {
     return (static_cast<long long>(x) << 32) | (z & 0xffffffff);
 }
 
+ChunkManager::ChunkManager() {
+    workerThread = std::thread([this]() {
+        while (running) {
+            GenerationRequest req;
+            {
+                std::unique_lock<std::mutex> lock(queueMutex);
+                cv.wait(lock, [this]() {
+                    return !generationQueue.empty() || !running;
+                });
+                if (!running) break;
+                req = generationQueue.front();
+                generationQueue.pop();
+            }
+
+            GenerationResult result;
+            result.key = req.key;
+            result.vertices = PerlinGen::generate(0.05f, req.x, req.z);
+
+            {
+                std::lock_guard<std::mutex> lock(uploadMutex);
+                uploadQueue.push(std::move(result));
+            }
+        }
+    });
+}
+
+ChunkManager::~ChunkManager() {
+    running = false;
+    cv.notify_one();
+    if (workerThread.joinable())
+        workerThread.join();
+}
+
 /**
  * @param playerChunk_x 
  * @param playerChunk_z 
@@ -68,9 +101,14 @@ void ChunkManager::update(const int playerChunk_x, const int playerChunk_z, cons
                 Chunk chunk;
                 chunk.coord = {x_shifted, z_shifted};
 
-                chunk.vertices = PerlinGen::generate(0.05f, x_shifted, z_shifted);
                 chunk.ready = false;
                 world.emplace(key, std::move(chunk));
+                
+                {
+                    std::lock_guard<std::mutex> lock(queueMutex);
+                    generationQueue.push({x_shifted, z_shifted, key});
+                }
+                cv.notify_one();
             }
         }
     }
@@ -96,16 +134,27 @@ void ChunkManager::update(const int playerChunk_x, const int playerChunk_z, cons
 }
 
 void ChunkManager::uploadMesh() {
-    int drawn = 0;
+    int uploadsThisFrame = 0;
+
+    {
+        std::lock_guard<std::mutex> lock(uploadMutex);
+        while (!uploadQueue.empty() && uploadsThisFrame < 4) {
+            GenerationResult result = std::move(uploadQueue.front());
+            uploadQueue.pop();
+
+            auto it = world.find(result.key);
+            if (it == world.end()) continue; // chunk was unloaded before upload
+
+            Chunk& chunk = it->second;
+            chunk.vertices = std::move(result.vertices);
+            uploadsThisFrame++;
+        }
+    }
+
     for (auto& [key, chunk] : world) {
-        /* Debug */
-        // std::cout << "Chunk ready: " << chunk.ready << " vertices: " << chunk.vertices.size() << '\n';
         if (!chunk.ready && !chunk.vertices.empty()) {
             glGenVertexArrays(1, &chunk.VAO);
             glGenBuffers(1, &chunk.VBO);
-
-            /* Debug */
-            ++drawn;
 
             glBindVertexArray(chunk.VAO);
             glBindBuffer(GL_ARRAY_BUFFER, chunk.VBO);
@@ -134,22 +183,25 @@ void ChunkManager::uploadMesh() {
             chunk.ready = true;
         }
     }
-    /* Debug */
-    // std::cout << "Drew " << drawn << " chunks, " << world.size() << " total\n";
 }
 
 void ChunkManager::render() {
     for (auto& [key, chunk] : world) {
         if (!chunk.ready) continue;
-
-        // glm::mat4 model = glm::mat4(1.0f);
-
         glBindVertexArray(chunk.VAO);
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(chunk.vertices.size()));
     }
 }
 
 void ChunkManager::clear() {
+    {
+        std::lock_guard<std::mutex> lock(queueMutex);
+        while (!generationQueue.empty()) generationQueue.pop();
+    }
+    {
+        std::lock_guard<std::mutex> lock(uploadMutex);
+        while (!uploadQueue.empty()) uploadQueue.pop();
+    }
     for (auto& [key, chunk] : world) {
         if (chunk.ready) {
             glDeleteVertexArrays(1, &chunk.VAO);

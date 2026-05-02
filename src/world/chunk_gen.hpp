@@ -5,7 +5,20 @@
 #include <glm/glm.hpp>
 #include "../noise/perlin_gen.hpp"
 
-// #include "chunk.h"
+#include <thread>
+#include <mutex>
+#include <queue>
+#include <atomic>
+
+struct GenerationRequest {
+    int x, z;
+    long long key;
+};
+
+struct GenerationResult {
+    long long key;
+    std::vector<Vertex> vertices;
+};
 
 /**
  * @struct Chunk
@@ -28,7 +41,18 @@ class ChunkManager {
     private:
         std::unordered_map<long long, Chunk> world;
 
+        std::queue<GenerationRequest> generationQueue;
+        std::queue<GenerationResult> uploadQueue;
+        std::mutex queueMutex;
+        std::mutex uploadMutex;
+        std::atomic<bool> running{true};
+        std::thread workerThread;
+        std::condition_variable cv;
+
     public:
+        ChunkManager();
+        ~ChunkManager();
+
         void update(const int playerChunk_x, const int playerChunk_z, const int render_distance);
         void uploadMesh();
         void render();
