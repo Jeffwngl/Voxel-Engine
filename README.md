@@ -7,13 +7,14 @@ This is a project I have been using to learn more about OpenGL and C++ as well a
 ![C++](https://img.shields.io/badge/C++-17-blue?style=flat-square)
 ![OpenGL](https://img.shields.io/badge/OpenGL-3.3-green?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-macOS-lightgrey?style=flat-square)
-![Status](https://img.shields.io/badge/status-alpha-orange?style=flat-square)
+![Status](https://img.shields.io/badge/status-v0.0.1-orange?style=flat-square)
 
 ## Features
 
 - Procedural terrain generation using 3D Perlin noise with a height gradient
-- Chunk-based world — terrain is generated, uploaded, and culled dynamically based on player position
+- Chunk-based world — terrain is generated, uploaded, and culled dynamically based on player position, uses separate worker threads to generate chunks and render the scene
 - Face culling — only visible block faces are added to the mesh
+- Greed meshing - combines meshes on the same plane of the same texture
 - Texture array support — dirt, grass sides, grass top, and flower textures
 - Phong lighting model — ambient, diffuse, and specular lighting
 - First-person camera with mouse look and keyboard movement
