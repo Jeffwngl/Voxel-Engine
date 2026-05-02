@@ -8,6 +8,12 @@ https://renderwonk.com/publications/gdm-2002/GDM_August_2002.pdf
 LearnOpenGL.com
 
 https://learnopengl.com/Advanced-OpenGL/Cubemaps
+https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping
+
+https://computergraphics.stackexchange.com/questions/2192/cause-of-shadow-acne/2193
+
+https://0fps.net/2012/06/30/meshing-in-a-minecraft-game/
+https://www.youtube.com/watch?v=4xs66m1Of4A&t=410s
 
 
 ## Fog Effect

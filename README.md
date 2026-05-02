@@ -43,9 +43,10 @@ VoxelEngine/
 | [GLM](https://github.com/g-truc/glm) | 0.9.x | Math (vectors, matrices) |
 | [stb_image](https://github.com/nothings/stb) | — | Texture loading |
 | [stb_perlin](https://github.com/nothings/stb) | — | Perlin noise generation |
+| [im_gui](https://github.com/ocornut/imgui) | — | GUI |
 
 ## Installation
-Requires CMake 3.16+ and a C++17 compiler (gcc on macOS).
+Requires CMake 3.16+ and a C++17 compiler.
 
 ```bash
 git clone https://github.com/Jeffwngl/voxel-engine.git
@@ -89,10 +90,15 @@ For those who wish to still run this via WSL, you can install the dependencies u
 - Atmospheric Fog.
 - Octree implementation.
 
+## Resources
+
+Useful resources and short notes can be found in [My Docs](docs/docs.md).
+
 ## Screenshots
 
 ![picture](/public/picture1.png)
 ![picture](/public/picture2.png)
+![picture](/public/picture4.png)
 
 ### Development
 
