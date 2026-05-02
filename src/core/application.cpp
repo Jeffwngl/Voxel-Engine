@@ -373,10 +373,7 @@ void Game::calculateFPS() {
     frameCount++;
 
     if (currentTime - lastFrame >= 1.0) {
-        fps = (float)frameCount / (currentTime - lastFrame);
-
-        std::cout << std::fixed << std::setprecision(1) << fps << " FPS" << std::endl;
-
+        fps = static_cast<float>(frameCount);  // frameCount over exactly 1 second
         frameCount = 0;
         lastFrame = currentTime;
     }
