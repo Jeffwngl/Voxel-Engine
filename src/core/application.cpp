@@ -380,7 +380,6 @@ void Game::calculateFPS() {
     }
 }
 
-// TODO: Rewrite this
 void Game::onMouseMove(GLFWwindow* window, double xPos, double yPos) {
     auto* app = static_cast<Game*>(glfwGetWindowUserPointer(window));
     if (app->cursorEnabled) return;
