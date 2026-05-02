@@ -129,6 +129,9 @@ void Game::configureShaders() { // TODO: Move this to another file
         farPlane
     );
 
+    fogEnd = farPlane * 0.6f;
+    fogStart = farPlane * 0.2f;
+
     terrainShader->useShader();
     terrainShader->setInt("textureIDs", 0);
     terrainShader->setInt("shadowMap", 1);
@@ -297,6 +300,8 @@ void Game::render() {
     terrainShader->setMat4("projection", projection); // vertices into screen space
     terrainShader->setVec3("light.position", sunDir);
     terrainShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
+    terrainShader->setFloat("fog.fogStart", fogStart);
+    terrainShader->setFloat("fog.fogEnd", fogEnd); 
 
     if (wireframe) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -344,6 +349,12 @@ void Game::render() {
         projection = glm::perspective(glm::radians(45.0f),
             static_cast<float>(fbWidth) / static_cast<float>(fbHeight),
             0.1f, farPlane);
+        fogEnd = farPlane * 0.6f;
+        fogStart = farPlane * 0.2f;
+        // send updated fog to shader
+        terrainShader->useShader();
+        terrainShader->setFloat("fog.fogStart", fogStart);
+        terrainShader->setFloat("fog.fogEnd", fogEnd);
     }
     ImGui::End();
     ImGui::Render();
