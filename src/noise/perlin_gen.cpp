@@ -155,7 +155,7 @@ std::vector<Vertex> PerlinGen::generate(float scale, int chunkX, int chunkZ) {
             for (int j = 0; j < CHUNK_LENGTH; j++) {
                 if (chunk[i][j][k] != airID && isAir(i, j, k + 1)) {
                     float r = dist(gen);
-                    // flowers don't merge with grass — different texID keeps them separate
+                    // flowers dont merge with grass - different texID keeps them separate // TODO: find way to make this extensible to other textures
                     mask[i][j] = r < chance ? flowerTex : topTex;
                 }
             }
@@ -287,12 +287,12 @@ void PerlinGen::addTopFaceGreedy(std::vector<Vertex>& v, int x, int z, int y, fl
     float d = static_cast<float>(depth);
 
     v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}, ID});
-    v.push_back({glm::vec3(x + w, y + 1, z), normal, {w, 0.0f}, ID});
     v.push_back({glm::vec3(x + w, y + 1, z + d), normal, {w, d}, ID});
+    v.push_back({glm::vec3(x + w, y + 1, z), normal, {w, 0.0f}, ID});
 
     v.push_back({glm::vec3(x, y + 1, z), normal, {0.0f, 0.0f}, ID});
-    v.push_back({glm::vec3(x + w, y + 1, z + d), normal, {w, d}, ID});
     v.push_back({glm::vec3(x, y + 1, z + d), normal, {0.0f, d}, ID});
+    v.push_back({glm::vec3(x + w, y + 1, z + d), normal, {w, d}, ID});
 }
 
 void PerlinGen::addBottomFaceGreedy(std::vector<Vertex>& v, int x, int z, int y, float ID, int width, int depth) {
@@ -315,12 +315,12 @@ void PerlinGen::addFrontFaceGreedy(std::vector<Vertex>& v, int x, int z, int y, 
     float h = static_cast<float>(height);
 
     v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, h}, ID});
-    v.push_back({glm::vec3(x, y + h, z + 1), normal, {0.0f, 0.0f}, ID});
-    v.push_back({glm::vec3(x + w, y + h, z + 1), normal, {w, 0.0f}, ID});
+    v.push_back({glm::vec3(x + w, y, z + 1), normal, {w,    h}, ID});
+    v.push_back({glm::vec3(x + w, y + h, z + 1), normal, {w, 0.0f},ID});
 
-    v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, h}, ID});
-    v.push_back({glm::vec3(x + w, y + h, z + 1), normal, {w, 0.0f}, ID});
-    v.push_back({glm::vec3(x + w, y, z + 1), normal, {w, h}, ID});
+    v.push_back({glm::vec3(x, y, z + 1), normal, {0.0f, h},   ID});
+    v.push_back({glm::vec3(x + w, y + h, z + 1), normal, {w, 0.0f},ID});
+    v.push_back({glm::vec3(x, y + h, z + 1), normal, {0.0f, 0.0f},ID});
 }
 
 void PerlinGen::addBackFaceGreedy(std::vector<Vertex>& v, int x, int z, int y, float ID, int width, int height) {
@@ -328,13 +328,13 @@ void PerlinGen::addBackFaceGreedy(std::vector<Vertex>& v, int x, int z, int y, f
     float w = static_cast<float>(width);
     float h = static_cast<float>(height);
 
-    v.push_back({glm::vec3(x, y, z), normal, {w, h}, ID});
-    v.push_back({glm::vec3(x + w, y, z), normal, {0.0f, h}, ID});
-    v.push_back({glm::vec3(x + w, y + h, z), normal, {0.0f, 0.0f}, ID});
+    v.push_back({glm::vec3(x, y, z), normal, {0.0f, h}, ID});
+    v.push_back({glm::vec3(x, y + h, z), normal, {0.0f, 0.0f},ID});
+    v.push_back({glm::vec3(x + w, y + h, z), normal, {w, 0.0f},ID});
 
-    v.push_back({glm::vec3(x, y, z), normal, {w, h}, ID});
-    v.push_back({glm::vec3(x + w, y + h, z), normal, {0.0f, 0.0f}, ID});
-    v.push_back({glm::vec3(x, y + h, z), normal, {w, 0.0f}, ID});
+    v.push_back({glm::vec3(x, y, z), normal, {0.0f, h}, ID});
+    v.push_back({glm::vec3(x + w, y + h, z), normal, {w, 0.0f},ID});
+    v.push_back({glm::vec3(x + w, y, z), normal, {w, h}, ID});
 }
 
 void PerlinGen::addRightFaceGreedy(std::vector<Vertex>& v, int x, int z, int y, float ID, int depth, int height) {
