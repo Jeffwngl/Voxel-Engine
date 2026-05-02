@@ -116,6 +116,7 @@ class Game {
 
         /* render / chunks */
         int renderDistance = RENDER_DISTANCE;
+        int activeRenderDistance = RENDER_DISTANCE;
 
     public:
         GLFWwindow* window;

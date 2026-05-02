@@ -226,7 +226,7 @@ void Game::finish() {
     glfwTerminate();
 }
 
-void Game::update() { // TODO: Move to separate files
+void Game::update() {
     float currentFrame = static_cast<float>(glfwGetTime());
     deltaTime = currentFrame - lastTime;
     lastTime = currentFrame;
@@ -267,7 +267,7 @@ void Game::render() {
     /* Chunk Generation */
     int playerChunk_x = static_cast<int>(std::floor(camera.Position.x / CHUNK_SIZE));
     int playerChunk_z = static_cast<int>(std::floor(camera.Position.z / CHUNK_SIZE));
-    chunkManager.update(playerChunk_x, playerChunk_z, renderDistance);
+    chunkManager.update(playerChunk_x, playerChunk_z, activeRenderDistance);
     chunkManager.uploadMesh(); // put this at top so depth map can use it
 
     /* Render scene to depth map */
@@ -342,9 +342,9 @@ void Game::render() {
     ImGui::SliderFloat3("Direction", &sunDir.x, -1.0f, 1.0f);
     ImGui::Separator();
     ImGui::Text("World");
-    int prevRenderDistance = renderDistance;
     ImGui::SliderInt("Render Distance", &renderDistance, 1, 16);
-    if (renderDistance != prevRenderDistance) {
+    if (ImGui::IsItemDeactivatedAfterEdit()) {
+        activeRenderDistance = renderDistance;
         chunkManager.clear();
         int fbWidth, fbHeight;
         glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
@@ -359,6 +359,7 @@ void Game::render() {
         terrainShader->setFloat("fog.fogStart", fogStart);
         terrainShader->setFloat("fog.fogEnd", fogEnd);
     }
+
     ImGui::End();
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -373,7 +374,7 @@ void Game::calculateFPS() {
     frameCount++;
 
     if (currentTime - lastFrame >= 1.0) {
-        fps = static_cast<float>(frameCount);  // frameCount over exactly 1 second
+        fps = static_cast<float>(frameCount);
         frameCount = 0;
         lastFrame = currentTime;
     }
