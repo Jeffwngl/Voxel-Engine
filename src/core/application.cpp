@@ -277,8 +277,9 @@ void Game::render() {
     depthShader->useShader();
     depthShader->setMat4("lightSpaceMatrix", lightSpaceMatrix);
     depthShader->setMat4("terrainModel", glm::mat4(1.0f));
-    glCullFace(GL_FRONT); // render back faces to depth map
+    glDisable(GL_CULL_FACE); // TODO: Fix winding for faces
     chunkManager.render();
+    glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK); // restore for normal rendering
     glBindFramebuffer(GL_FRAMEBUFFER, 0); // return to default framebuffer
     // pass 2
